@@ -1,0 +1,248 @@
+A)j
+public class AlphabetDisplay {
+    public static void main(String[] args) throws InterruptedException {
+        for (char c = 'a'; c <= 'z'; c++) {
+            System.out.println(c);
+            Thread.sleep(2000);        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A) ASP.
+<!-- ASPX Page -->
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ColorChanger.aspx.cs" Inherits="ColorDemo.ColorChanger" %>
+<!DOCTYPE html>
+<html>
+<head><title>Color Changer</title></head>
+<body>
+    <form id="form1" runat="server">
+        <asp:DropDownList ID="ddlColors" runat="server">
+            <asp:ListItem>Red</asp:ListItem>
+            <asp:ListItem>Blue</asp:ListItem>
+            <asp:ListItem>Green</asp:ListItem>
+        </asp:DropDownList>
+        <asp:Button ID="btnChange" runat="server" Text="Change Color" OnClick="btnChange_Click" />
+    </form>
+</body>
+</html>
+csharp
+Copy
+Edit
+protected void btnChange_Click(object sender, EventArgs e)
+{
+    form1.Style["background-color"] = ddlColors.SelectedValue.ToLower();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B) C#
+using System;
+using System.Collections.Generic;
+
+class Customer {
+    public int CustomerNo;
+    public string Name;
+    public string Address;
+    public string ItemName;
+    public int Quantity;
+    public float Price;
+
+    public float TotalPrice => Quantity * Price;
+}
+
+class Program {
+    static void Main() {
+        List<Customer> customers = new List<Customer>();
+        Console.Write("Enter number of customers: ");
+        int n = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < n; i++) {
+            Customer c = new Customer();
+
+            Console.Write("Customer No: ");
+            c.CustomerNo = int.Parse(Console.ReadLine());
+
+            Console.Write("Name: ");
+            c.Name = Console.ReadLine();
+
+            Console.Write("Address: ");
+            c.Address = Console.ReadLine();
+
+            Console.Write("Item Name: ");
+            c.ItemName = Console.ReadLine();
+
+            Console.Write("Quantity: ");
+            c.Quantity = int.Parse(Console.ReadLine());
+
+            Console.Write("Price: ");
+            c.Price = float.Parse(Console.ReadLine());
+
+            customers.Add(c);
+        }
+
+        Console.WriteLine("\nCustomer Details and Total:");
+        foreach (var cust in customers) {
+            Console.WriteLine($"Customer No: {cust.CustomerNo}, Name: {cust.Name}, Total: {cust.TotalPrice}");
+        }
+    }
+}

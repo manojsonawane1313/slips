@@ -1,0 +1,268 @@
+A)j
+import java.sql.*;
+import java.util.*;
+
+public class DeleteEmployee {
+    public static void main(String[] args) {
+        if(args.length != 1){
+            System.out.println("Usage: java DeleteEmployee <EmployeeID>");
+            return;
+        }
+
+        int empId = Integer.parseInt(args[0]);
+
+        try {
+            // Load the driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Connect to database
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourDatabase", "username", "password");
+
+            // Create statement
+            String query = "DELETE FROM employee WHERE ENo = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setInt(1, empId);
+
+            int rowsAffected = pst.executeUpdate();
+            if(rowsAffected > 0){
+                System.out.println("Employee deleted successfully.");
+            } else {
+                System.out.println("Employee not found.");
+            }
+
+            con.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B)j
+import java.applet.*;
+import java.awt.*;
+
+public class TempleDrawing extends Applet implements Runnable {
+    Thread t;
+
+    public void init() {
+        t = new Thread(this);
+        t.start();
+    }
+
+    public void run() {
+        while(true) {
+            repaint();
+            try {
+                Thread.sleep(1000);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void paint(Graphics g) {
+        g.setColor(Color.GRAY);
+        g.fillRect(100, 200, 200, 100);
+
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(120, 150, 20, 50);
+        g.fillRect(260, 150, 20, 50);
+
+        g.setColor(Color.RED);
+        int x[] = {100, 200, 300};
+        int y[] = {200, 100, 200};
+        g.fillPolygon(x, y, 3);
+
+        g.setColor(Color.BLACK);
+        g.drawString("Temple", 180, 250);
+    }
+}
+
+
+*
+<html>
+<body>
+<applet code="TempleDrawing.class" width="400" height="400"></applet>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A).
+Public Class Form1
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim rootNode As New TreeNode("Root")
+        rootNode.Nodes.Add("Child 1")
+        rootNode.Nodes.Add("Child 2")
+
+        Dim subNode As New TreeNode("Child 3")
+        subNode.Nodes.Add("SubChild 1")
+        subNode.Nodes.Add("SubChild 2")
+
+        rootNode.Nodes.Add(subNode)
+        TreeView1.Nodes.Add(rootNode)
+        TreeView1.ExpandAll()
+    End Sub
+End Class

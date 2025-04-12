@@ -1,0 +1,421 @@
+A)
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.util.regex.*" %>
+<html>
+<head>
+    <title>Email Validation</title>
+</head>
+<body>
+    <form method="post">
+        Enter Email: <input type="text" name="email" />
+        <input type="submit" value="Validate" />
+    </form>
+
+    <%
+        String email = request.getParameter("email");
+        if (email != null) {
+            String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(email);
+
+            if (matcher.matches()) {
+                out.println("<p style='color:green;'>Valid Email ID</p>");
+            } else {
+                out.println("<p style='color:red;'>Invalid Email ID</p>");
+            }
+        }
+    %>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b)j
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class NumberDisplayApp extends JFrame implements ActionListener {
+    JTextField textField;
+    JButton startButton;
+
+    public NumberDisplayApp() {
+        setTitle("Multithread Number Display");
+        setLayout(new FlowLayout());
+        setSize(300, 150);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        textField = new JTextField(20);
+        startButton = new JButton("Start");
+
+        add(textField);
+        add(startButton);
+
+        startButton.addActionListener(this);
+
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        NumberThread nt = new NumberThread(textField);
+        Thread t = new Thread(nt);
+        t.start();
+    }
+
+    public static void main(String[] args) {
+        new NumberDisplayApp();
+    }
+}
+
+class NumberThread implements Runnable {
+    JTextField tf;
+
+    public NumberThread(JTextField tf) {
+        this.tf = tf;
+    }
+
+    public void run() {
+        for (int i = 1; i <= 100; i++) {
+            tf.setText(String.valueOf(i));
+            try {
+                Thread.sleep(100);  // 100ms delay for better visualization
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A) ASP.
+<%@ Page Language="C#" AutoEventWireup="true" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfect Number Checker</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        Enter Number: <asp:TextBox ID="txtNumber" runat="server"></asp:TextBox>
+        <asp:Button ID="btnCheck" runat="server" Text="Check" OnClick="btnCheck_Click" />
+        <br />
+        <asp:Label ID="lblResult" runat="server" ForeColor="Red"></asp:Label>
+    </form>
+
+    <script runat="server">
+        protected void btnCheck_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int num = int.Parse(txtNumber.Text);
+                int sum = 0;
+
+                for (int i = 1; i < num; i++)
+                {
+                    if (num % i == 0)
+                        sum += i;
+                }
+
+                if (sum == num)
+                    lblResult.Text = "Perfect Number";
+                else
+                    throw new Exception("Not a Perfect Number");
+            }
+            catch (Exception ex)
+            {
+                lblResult.Text = ex.Message;
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B) VB.
+Public Class Form1
+    Dim dt As New DataTable
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        dt.Columns.Add("Roll No")
+        dt.Columns.Add("SName")
+        dt.Columns.Add("Class")
+        dt.Columns.Add("City")
+
+        ' Insert Records
+        dt.Rows.Add("1", "pratik", "BBA", "Mumbai")
+        dt.Rows.Add("2", "Neha", "BCA", "Mumbai")
+        dt.Rows.Add("3", "Rahul", "BBA", "Delhi")
+        dt.Rows.Add("4", "Sneha", "BCA", "Mumbai")
+        dt.Rows.Add("5", "Anil", "BBA", "Pune")
+
+        ' Update city from Mumbai to Pune
+        For Each row As DataRow In dt.Rows
+            If row("City") = "Mumbai" Then
+                row("City") = "Pune"
+            End If
+        Next
+
+        ' Bind to DataGridView
+        DataGridView1.DataSource = dt
+    End Sub
+End Class

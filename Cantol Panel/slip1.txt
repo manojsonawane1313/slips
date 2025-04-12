@@ -1,0 +1,269 @@
+A)j
+import javax.swing.*;
+import java.awt.*;
+
+public class ScrollingText extends JFrame implements Runnable {
+    String text = " Welcome to Advanced Java ";
+    int x = 0;
+    boolean direction = true;
+
+    public ScrollingText() {
+        setTitle("Scrolling Text");
+        setSize(500, 100);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        Thread t = new Thread(this);
+        t.start();
+    }
+
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.drawString(text, x, 60);
+    }
+
+    public void run() {
+        while (true) {
+            if (direction)
+                x += 10;
+            else
+                x -= 10;
+
+            if (x > getWidth())
+                direction = false;
+            else if (x < 0)
+                direction = true;
+
+            repaint();
+            try {
+                Thread.sleep(150);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new ScrollingText();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A).
+Public Class Form1
+    Dim counter As Integer
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        counter = 0
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        counter = counter + 1
+        TextBox1.Text = counter
+    End Sub
+End Class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B) Imports System.Data.SqlClient
+
+Public Class Form1
+    Dim con As New SqlConnection("Data Source=.\SQLEXPRESS;Initial Catalog=EmployeeDB;Integrated Security=True")
+    Dim cmd As SqlCommand
+    Dim da As SqlDataAdapter
+    Dim dt As DataTable
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadData()
+    End Sub
+
+    Private Sub LoadData()
+        Try
+            con.Open()
+            da = New SqlDataAdapter("SELECT * FROM Employee", con)
+            dt = New DataTable()
+            da.Fill(dt)
+            DataGridView1.DataSource = dt
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+        Finally
+            con.Close()
+        End Try
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Try
+            con.Open()
+            Dim query As String = "INSERT INTO Employee (ENO, EName, Salary) VALUES (@eno, @ename, @salary)"
+            cmd = New SqlCommand(query, con)
+            cmd.Parameters.AddWithValue("@eno", Convert.ToInt32(txtENO.Text))
+            cmd.Parameters.AddWithValue("@ename", txtEName.Text)
+            cmd.Parameters.AddWithValue("@salary", Convert.ToDecimal(txtSalary.Text))
+            cmd.ExecuteNonQuery()
+            MessageBox.Show("Employee added successfully!")
+            LoadData()
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+        Finally
+            con.Close()
+        End Try
+    End Sub
+End Class
+
+*sql
+CREATE TABLE Employee (
+    ENO INT PRIMARY KEY,
+    EName VARCHAR(50),
+    Salary DECIMAL(10,2)
+);

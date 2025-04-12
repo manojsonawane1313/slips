@@ -1,0 +1,371 @@
+a)j
+import java.io.*;
+import java.net.*;
+
+public class PrimeServer {
+    public static void main(String[] args) {
+        try {
+            ServerSocket ss = new ServerSocket(5000);
+            System.out.println("Server is waiting for client...");
+
+            Socket s = ss.accept();
+            System.out.println("Client connected.");
+
+            DataInputStream dis = new DataInputStream(s.getInputStream());
+            DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+
+            int number = dis.readInt();
+            boolean isPrime = true;
+
+            if (number <= 1) {
+                isPrime = false;
+            } else {
+                for (int i = 2; i <= number / 2; i++) {
+                    if (number % i == 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+            }
+
+            String result = isPrime ? "Number is Prime" : "Number is Not Prime";
+            dos.writeUTF(result);
+
+            s.close();
+            ss.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B)j
+import java.applet.*;
+import java.awt.*;
+import java.util.Random;
+
+public class BouncingBallApplet extends Applet implements Runnable {
+    int x = 50, y = 50, dx = 5, dy = 5;
+    Color ballColor;
+    Thread t;
+    Random rand = new Random();
+
+    public void init() {
+        ballColor = getRandomColor();
+        t = new Thread(this);
+        t.start();
+    }
+
+    public void paint(Graphics g) {
+        g.setColor(ballColor);
+        g.fillOval(x, y, 30, 30);
+    }
+
+    public void run() {
+        while (true) {
+            x += dx;
+            y += dy;
+
+            if (x < 0 || x > getWidth() - 30) {
+                dx = -dx;
+                ballColor = getRandomColor();
+            }
+
+            if (y < 0 || y > getHeight() - 30) {
+                dy = -dy;
+                ballColor = getRandomColor();
+            }
+
+            repaint();
+            try {
+                Thread.sleep(30);
+            } catch (Exception e) {}
+        }
+    }
+
+    public Color getRandomColor() {
+        return new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A)#
+using System;
+
+class Program {
+    static int Add(int a, int b) {
+        return a + b;
+    }
+
+    static void Main() {
+        Console.Write("Enter first number: ");
+        int x = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter second number: ");
+        int y = int.Parse(Console.ReadLine());
+
+        int sum = Add(x, y);
+        Console.WriteLine("Sum = " + sum);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B)#
+Dim teacherTable As New DataTable()
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    teacherTable.Columns.Add("Tid")
+    teacherTable.Columns.Add("TName")
+    teacherTable.Columns.Add("Subject")
+    DataGridView1.DataSource = teacherTable
+End Sub
+
+Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+    If teacherTable.Rows.Count < 5 Then
+        teacherTable.Rows.Add(txtTid.Text, txtTName.Text, txtSubject.Text)
+        MessageBox.Show("Record Added")
+    Else
+        MessageBox.Show("Only 5 Records Allowed")
+    End If
+End Sub
+
+Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+    Dim foundRows = teacherTable.Select("TName = 'Seeta'")
+    If foundRows.Length > 0 Then
+        Dim result As String = ""
+        For Each row As DataRow In foundRows
+            result &= "Tid: " & row("Tid") & ", Subject: " & row("Subject") & vbCrLf
+        Next
+        MessageBox.Show(result)
+    Else
+        MessageBox.Show("No Record Found")
+    End If
+End Sub

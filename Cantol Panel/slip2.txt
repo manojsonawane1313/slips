@@ -1,0 +1,263 @@
+A)j
+<%@ include file="checkPerfect.jsp" %>
+<html>
+<body>
+    <form method="post">
+        Enter a Number: <input type="text" name="num">
+        <input type="submit" value="Check">
+    </form>
+
+    <%
+        String number = request.getParameter("num");
+        if (number != null) {
+            int n = Integer.parseInt(number);
+            if (isPerfect(n)) {
+                out.println("<h3>" + n + " is a Perfect Number.</h3>");
+            } else {
+                out.println("<h3>" + n + " is NOT a Perfect Number.</h3>");
+            }
+        }
+    %>
+</body>
+</html>
+  checkPerfect.jsp
+
+jsp
+Copy
+Edit
+<%! 
+    public boolean isPerfect(int number) {
+        int sum = 0;
+        for (int i = 1; i < number; i++) {
+            if (number % i == 0)
+                sum += i;
+        }
+        return sum == number;
+    }
+%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A).
+Dim directionRight As Boolean = True
+Dim x As Integer = 0
+
+Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    If directionRight Then
+        x += 10
+        If x >= Me.Width - Label1.Width Then directionRight = False
+    Else
+        x -= 10
+        If x <= 0 Then directionRight = True
+    End If
+    Label1.Location = New Point(x, Label1.Location.Y)
+End Sub
+
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Label1.Text = "Pune University"
+    Timer1.Interval = 100
+    Timer1.Start()
+End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B).
+using System;
+
+class Department {
+    public string DeptName;
+    public void AcceptDetails() {
+        Console.Write("Enter Department Name: ");
+        DeptName = Console.ReadLine();
+    }
+    public virtual void Display() {
+        Console.WriteLine("Department: " + DeptName);
+    }
+}
+
+class Sales : Department {
+    public string SalesTarget;
+    public override void Display() {
+        base.Display();
+        Console.Write("Enter Sales Target: ");
+        SalesTarget = Console.ReadLine();
+        Console.WriteLine("Sales Target: " + SalesTarget);
+    }
+}
+
+class HumanResource : Department {
+    public int NoOfEmployees;
+    public override void Display() {
+        base.Display();
+        Console.Write("Enter Number of Employees: ");
+        NoOfEmployees = int.Parse(Console.ReadLine());
+        Console.WriteLine("Employees: " + NoOfEmployees);
+    }
+}
+
+class Program {
+    static void Main() {
+        Sales s = new Sales();
+        s.AcceptDetails();
+        s.Display();
+
+        HumanResource hr = new HumanResource();
+        hr.AcceptDetails();
+        hr.Display();
+    }
+}

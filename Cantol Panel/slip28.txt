@@ -1,0 +1,342 @@
+A)j
+class Table {
+    synchronized void printTable(int n) { // synchronized method
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(n * i);
+            try {
+                Thread.sleep(400);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+}
+
+class MyThread1 extends Thread {
+    Table t;
+
+    MyThread1(Table t) {
+        this.t = t;
+    }
+
+    public void run() {
+        t.printTable(5);
+    }
+}
+
+class MyThread2 extends Thread {
+    Table t;
+
+    MyThread2(Table t) {
+        this.t = t;
+    }
+
+    public void run() {
+        t.printTable(100);
+    }
+}
+
+public class TestSynchronization {
+    public static void main(String args[]) {
+        Table obj = new Table(); // only one object
+        MyThread1 t1 = new MyThread1(obj);
+        MyThread2 t2 = new MyThread2(obj);
+        t1.start();
+        t2.start();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A) C#
+using System;
+
+class ReverseArray {
+    static void Main() {
+        Console.Write("Enter number of elements: ");
+        int n = int.Parse(Console.ReadLine());
+
+        int[] arr = new int[n];
+
+        Console.WriteLine("Enter the elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = int.Parse(Console.ReadLine());
+        }
+
+        Console.WriteLine("Array in reverse order:");
+        for (int i = n - 1; i >= 0; i--) {
+            Console.Write(arr[i] + " ");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B).
+Imports System.Data
+Imports System.Windows.Forms
+
+Public Class Form1
+    Dim dt As New DataTable()
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        dt.Columns.Add("PID")
+        dt.Columns.Add("PName")
+        dt.Columns.Add("Contact No")
+        dt.Columns.Add("Disease")
+
+        dt.Rows.Add("P001", "Alice", "1234567890", "Flu")
+        dt.Rows.Add("P002", "Bob", "2345678901", "Cold")
+        dt.Rows.Add("P003", "Charlie", "3456789012", "Fever")
+        dt.Rows.Add("P004", "David", "4567890123", "Cough")
+        dt.Rows.Add("P005", "Eva", "5678901234", "Allergy")
+
+        Dim msg As String = "Patient Records:" & vbCrLf
+        For Each row As DataRow In dt.Rows
+            msg &= String.Join(", ", row.ItemArray) & vbCrLf
+        Next
+
+        MessageBox.Show(msg, "Patient Details")
+    End Sub
+End Class

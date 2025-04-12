@@ -1,0 +1,362 @@
+A) Java Program to delete students whose names start with ‘S’
+java
+Copy
+Edit
+import java.util.ArrayList;
+import java.util.Iterator;
+
+class Student {
+    String name;
+    int id;
+
+    Student(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public String toString() {
+        return id + ": " + name;
+    }
+}
+
+public class DeleteStudents {
+    public static void main(String[] args) {
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(new Student("Sam", 1));
+        students.add(new Student("John", 2));
+        students.add(new Student("Sonia", 3));
+        students.add(new Student("Alex", 4));
+
+        Iterator<Student> it = students.iterator();
+        while (it.hasNext()) {
+            Student s = it.next();
+            if (s.name.startsWith("S")) {
+                it.remove();
+            }
+        }
+
+        System.out.println("Remaining students:");
+        for (Student s : students) {
+            System.out.println(s);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b)j
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.*;
+
+public class InfoServlet extends HttpServlet {
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        
+        String ipAddress = request.getRemoteAddr();
+        String browser = request.getHeader("User-Agent");
+
+       
+        String os = System.getProperty("os.name");
+        ServletContext context = getServletContext();
+        Enumeration<String> servletNames = context.getServletNames();
+
+        out.println("<html><body>");
+        out.println("<h2>Client Information</h2>");
+        out.println("IP Address: " + ipAddress + "<br>");
+        out.println("Browser Info: " + browser + "<br>");
+
+        out.println("<h2>Server Information</h2>");
+        out.println("Operating System: " + os + "<br>");
+
+        out.println("<h2>Loaded Servlets</h2>");
+        while (servletNames.hasMoreElements()) {
+            out.println(servletNames.nextElement() + "<br>");
+        }
+
+        out.println("</body></html>");
+    }
+}
+
+
+
+
+<web-app>
+    <servlet>
+        <servlet-name>InfoServlet</servlet-name>
+        <servlet-class>InfoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InfoServlet</servlet-name>
+        <url-pattern>/info</url-pattern>
+    </servlet-mapping>
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A).
+Public Class Form1
+    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
+        TextBoxDay.Text = DateTimePicker1.Value.Day.ToString()
+        TextBoxMonth.Text = DateTimePicker1.Value.Month.ToString()
+        TextBoxYear.Text = DateTimePicker1.Value.Year.ToString()
+    End Sub
+End Class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B) Web application in .NET to insert, update, delete employee records
+Example using ASP.NET with ADO.NET (VB.NET code-behind):
+
+vb
+Copy
+Edit
+' Assume you have a SQL table (Employee) with columns: DeptId, DeptName, EmpName, Salary
+
+' INSERT
+Dim con As New SqlConnection("your_connection_string")
+Dim cmd As New SqlCommand("INSERT INTO Employee (DeptId, DeptName, EmpName, Salary) VALUES (@DeptId, @DeptName, @EmpName, @Salary)", con)
+cmd.Parameters.AddWithValue("@DeptId", "D01")
+cmd.Parameters.AddWithValue("@DeptName", "Sales")
+cmd.Parameters.AddWithValue("@EmpName", "John Doe")
+cmd.Parameters.AddWithValue("@Salary", 50000)
+con.Open()
+cmd.ExecuteNonQuery()
+con.Close()
+
+' UPDATE (Increase salary by 15%)
+Dim updateCmd As New SqlCommand("UPDATE Employee SET Salary = Salary + (Salary * 0.15) WHERE EmpName = @EmpName", con)
+updateCmd.Parameters.AddWithValue("@EmpName", "John Doe")
+con.Open()
+updateCmd.ExecuteNonQuery()
+con.Close()
+
+' DELETE (delete one row)
+Dim deleteCmd As New SqlCommand("DELETE FROM Employee WHERE EmpName = @EmpName", con)
+deleteCmd.Parameters.AddWithValue("@EmpName", "John Doe")
+con.Open()
+deleteCmd.ExecuteNonQuery()
+con.Close()

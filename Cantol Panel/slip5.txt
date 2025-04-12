@@ -1,0 +1,233 @@
+A)j
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<html>
+<head>
+    <title>Sum of First and Last Digit</title>
+</head>
+<body>
+<%
+    int number = 12345;  
+    int lastDigit = number % 10;
+    int firstDigit = number;
+
+    while (firstDigit >= 10) {
+        firstDigit /= 10;
+    }
+
+    int sum = firstDigit + lastDigit;
+%>
+    <h2 style="color: red; font-size: 18px;">Sum of First and Last Digit: <%= sum %></h2>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B)
+import java.applet.Applet;
+import java.awt.*;
+import java.util.Random;
+
+public class TrafficSignalApplet extends Applet implements Runnable {
+    Thread t;
+    String currentSignal = "";
+
+    public void init() {
+        t = new Thread(this);
+        t.start();
+    }
+
+    public void run() {
+        String[] signals = {"RED", "YELLOW", "GREEN"};
+        try {
+            while (true) {
+                for (String signal : signals) {
+                    currentSignal = signal;
+                    repaint();
+                    Thread.sleep(2000);                 }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void paint(Graphics g) {
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        if (currentSignal.equals("RED")) {
+            g.setColor(Color.RED);
+        } else if (currentSignal.equals("YELLOW")) {
+            g.setColor(Color.YELLOW);
+        } else if (currentSignal.equals("GREEN")) {
+            g.setColor(Color.GREEN);
+        }
+        g.drawString("Signal: " + currentSignal, 50, 100);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A).
+Module Module1
+    Sub Main()
+        Console.Write("Enter a character: ")
+        Dim ch As Char = Char.ToLower(Console.ReadLine())
+
+        If "aeiou".Contains(ch) Then
+            Console.WriteLine("It is a Vowel.")
+        ElseIf Char.IsLetter(ch) Then
+            Console.WriteLine("It is a Consonant.")
+        Else
+            Console.WriteLine("Not a valid alphabet.")
+        End If
+
+        If Char.IsLower(ch) Then
+            Console.WriteLine("Character is in Lowercase.")
+        ElseIf Char.IsUpper(ch) Then
+            Console.WriteLine("Character is in Uppercase.")
+        End If
+
+        Console.ReadLine()
+    End Sub
+End Module

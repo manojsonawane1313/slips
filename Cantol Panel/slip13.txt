@@ -1,0 +1,381 @@
+Q.1 
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Currently executing thread: " + Thread.currentThread().getName());
+    }
+
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        MyThread t2 = new MyThread();
+
+        t1.setName("Thread-1");
+        t2.setName("Thread-2");
+
+        t1.start();
+        t2.start();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B)j
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<html>
+<head>
+    <title>College Details</title>
+</head>
+<body>
+    <h2>College Details</h2>
+    <table border="1">
+        <tr>
+            <th>CollegeID</th>
+            <th>College Name</th>
+            <th>Address</th>
+        </tr>
+        <%
+            String[][] colleges = {
+                {"101", "ABC College", "New York"},
+                {"102", "XYZ Institute", "Los Angeles"},
+                {"103", "LMN University", "Chicago"}
+            };
+
+            for(int i = 0; i < colleges.length; i++) {
+        %>
+        <tr>
+            <td><%= colleges[i][0] %></td>
+            <td><%= colleges[i][1] %></td>
+            <td><%= colleges[i][2] %></td>
+        </tr>
+        <%
+            }
+        %>
+    </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q.2a .
+Public Class Form1
+    Dim blink As Boolean = True
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Timer1.Interval = 500
+        Timer1.Start()
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        PictureBox1.Visible = blink
+        blink = Not blink
+    End Sub
+End Class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b).
+using System;
+
+class Student
+{
+    public int RollNo;
+    public string Name;
+    public int[] Marks = new int[3];
+    public float Percentage;
+
+    public void AcceptDetails()
+    {
+        Console.Write("Enter Roll Number: ");
+        RollNo = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter Name: ");
+        Name = Console.ReadLine();
+
+        Console.WriteLine("Enter marks for 3 subjects:");
+        int total = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            Console.Write($"Subject {i + 1}: ");
+            Marks[i] = int.Parse(Console.ReadLine());
+            total += Marks[i];
+        }
+
+        Percentage = (float)total / 3;
+    }
+
+    public void DisplayDetails()
+    {
+        Console.WriteLine($"\nRoll No: {RollNo}");
+        Console.WriteLine($"Name: {Name}");
+        Console.WriteLine("Marks: ");
+        for (int i = 0; i < 3; i++)
+        {
+            Console.WriteLine($"\tSubject {i + 1}: {Marks[i]}");
+        }
+        Console.WriteLine($"Percentage: {Percentage:F2}%");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter number of students: ");
+        int n = int.Parse(Console.ReadLine());
+
+        Student[] students = new Student[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine($"\nEnter details for Student {i + 1}");
+            students[i] = new Student();
+            students[i].AcceptDetails();
+        }
+
+        Console.WriteLine("\n--- Student Details ---");
+        for (int i = 0; i < n; i++)
+        {
+            students[i].DisplayDetails();
+        }
+
+        Console.ReadLine();
+    }
+}

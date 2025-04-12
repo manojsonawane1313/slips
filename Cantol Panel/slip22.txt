@@ -1,0 +1,292 @@
+1)j
+import java.io.*;
+import java.net.*;
+import java.util.Date;
+
+public class DateServer {
+    public static void main(String[] args) {
+        try {
+            ServerSocket serverSocket = new ServerSocket(5000);
+            System.out.println("Server started. Waiting for client...");
+
+            Socket socket = serverSocket.accept();
+            System.out.println("Client connected.");
+
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            Date currentDate = new Date();
+            out.println("Server Date and Time: " + currentDate.toString());
+
+            out.close();
+            socket.close();
+            serverSocket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+*client
+
+import java.io.*;
+import java.net.*;
+
+public class DateClient {
+    public static void main(String[] args) {
+        try {
+            Socket socket = new Socket("localhost", 5000);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            String serverTime = in.readLine();
+            System.out.println("Received from Server: " + serverTime);
+
+            in.close();
+            socket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b)j
+<%@ page import="java.sql.*" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Account Entry</title>
+</head>
+<body>
+    <h2>Enter Account Details</h2>
+    <form method="post" action="account.jsp">
+        Account No: <input type="text" name="ano" /><br><br>
+        Type: <input type="text" name="type" /><br><br>
+        Balance: <input type="text" name="bal" /><br><br>
+        <input type="submit" value="Save & Show" />
+    </form>
+
+    <hr>
+
+<%
+    String ano = request.getParameter("ano");
+    String type = request.getParameter("type");
+    String bal = request.getParameter("bal");
+
+    if (ano != null && type != null && bal != null) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "root", "yourpassword");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO account VALUES (?, ?, ?)");
+            ps.setInt(1, Integer.parseInt(ano));
+            ps.setString(2, type);
+            ps.setDouble(3, Double.parseDouble(bal));
+            ps.executeUpdate();
+
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM account");
+
+%>
+
+    <h2>Account Details</h2>
+    <table border="1">
+        <tr>
+            <th>Account No</th>
+            <th>Type</th>
+            <th>Balance</th>
+        </tr>
+
+<%
+            while (rs.next()) {
+%>
+        <tr>
+            <td><%= rs.getInt("ANo") %></td>
+            <td><%= rs.getString("Type") %></td>
+            <td><%= rs.getDouble("Bal") %></td>
+        </tr>
+<%
+            }
+            con.close();
+        } catch (Exception e) {
+            out.println("Error: " + e.getMessage());
+        }
+    }
+%>
+
+    </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+a)#
+using System;
+
+class Program
+{
+    
+    static void Swap(ref int a, ref int b)
+    {
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+
+    static void Main(string[] args)
+    {
+        int num1 = 10;
+        int num2 = 20;
+
+        Console.WriteLine("Before Swap:");
+        Console.WriteLine("num1 = " + num1);
+        Console.WriteLine("num2 = " + num2);
+
+        Swap(ref num1, ref num2);
+
+        Console.WriteLine("\nAfter Swap:");
+        Console.WriteLine("num1 = " + num1);
+        Console.WriteLine("num2 = " + num2);
+
+        Console.ReadLine();
+    }
+}

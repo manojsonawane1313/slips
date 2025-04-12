@@ -1,0 +1,264 @@
+A)j
+<%@ page import="java.util.*" %>
+<html>
+<head><title>Greet User</title></head>
+<body>
+    <form method="post">
+        Enter your name: <input type="text" name="username"/>
+        <input type="submit" value="Greet"/>
+    </form>
+
+    <%
+        String username = request.getParameter("username");
+        if (username != null && !username.isEmpty()) {
+            Calendar calendar = Calendar.getInstance();
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            String greeting;
+
+            if (hour < 12)
+                greeting = "Good Morning";
+            else if (hour < 17)
+                greeting = "Good Afternoon";
+            else
+                greeting = "Good Evening";
+
+            out.println("<h2>" + greeting + ", " + username + "!</h2>");
+        }
+    %>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B)j
+import javax.swing.*;
+import java.awt.event.*;
+import java.sql.*;
+
+public class StudentRecordFetcher {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Student Record");
+
+        JTextField tf1 = new JTextField();
+        tf1.setBounds(50, 50, 150, 20);
+
+        JTextField tf2 = new JTextField();
+        tf2.setBounds(50, 80, 150, 20);
+
+        JTextField tf3 = new JTextField();
+        tf3.setBounds(50, 110, 150, 20);
+
+        JButton btn = new JButton("Fetch");
+        btn.setBounds(50, 150, 100, 30);
+
+        btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourDB", "root", "password");
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM student LIMIT 1");
+
+                    if (rs.next()) {
+                        tf1.setText(rs.getString("rno"));
+                        tf2.setText(rs.getString("sname"));
+                        tf3.setText(rs.getString("per"));
+                    }
+                    con.close();
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                }
+            }
+        });
+
+        frame.add(tf1); frame.add(tf2); frame.add(tf3);
+        frame.add(btn);
+        frame.setSize(300, 300);
+        frame.setLayout(null);
+        frame.setVisible(true);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A).
+Module Module1
+    Sub Main()
+        Console.Write("Enter a string: ")
+        Dim str As String = Console.ReadLine()
+        Dim revStr As String = StrReverse(str)
+
+        If str.ToLower() = revStr.ToLower() Then
+            Console.WriteLine("The string is a palindrome.")
+        Else
+            Console.WriteLine("The string is not a palindrome.")
+        End If
+        Console.ReadLine()
+    End Sub
+End Module

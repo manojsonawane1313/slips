@@ -1,0 +1,280 @@
+A)
+import java.net.*;
+
+public class ClientInfo {
+    public static void main(String[] args) {
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            System.out.println("Client Name: " + inetAddress.getHostName());
+            System.out.println("IP Address: " + inetAddress.getHostAddress());
+        } catch (UnknownHostException e) {
+            System.out.println("Unable to get host information");
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B)
+import java.sql.*;
+import java.util.Scanner;
+
+public class SalesReport {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter start date (YYYY-MM-DD): ");
+        String startDate = sc.nextLine();
+        System.out.print("Enter end date (YYYY-MM-DD): ");
+        String endDate = sc.nextLine();
+
+        String url = "jdbc:mysql://localhost:3306/your_database";
+        String user = "root";
+        String password = "your_password";
+
+        String query = "SELECT PID, PName, Qty, Rate, Amount FROM Sales WHERE SaleDate BETWEEN ? AND ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, startDate);
+            stmt.setString(2, endDate);
+
+            ResultSet rs = stmt.executeQuery();
+
+            System.out.println("PID\tPName\tQty\tRate\tAmount");
+
+            while (rs.next()) {
+                System.out.println(
+                    rs.getInt("PID") + "\t" +
+                    rs.getString("PName") + "\t" +
+                    rs.getInt("Qty") + "\t" +
+                    rs.getDouble("Rate") + "\t" +
+                    rs.getDouble("Amount")
+                );
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        sc.close();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B) C#
+using System;
+
+class Fruit
+{
+    public int Quantity { get; set; }
+
+    public Fruit(int quantity)
+    {
+        Quantity = quantity;
+    }
+}
+
+class Apple : Fruit
+{
+    public Apple(int quantity) : base(quantity) { }
+}
+
+class Mango : Fruit
+{
+    public Mango(int quantity) : base(quantity) { }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Apple apples = new Apple(10);
+        Mango mangoes = new Mango(15);
+
+        int totalFruits = apples.Quantity + mangoes.Quantity;
+
+        Console.WriteLine("Number of apples: " + apples.Quantity);
+        Console.WriteLine("Number of mangoes: " + mangoes.Quantity);
+        Console.WriteLine("Total number of fruits in the basket: " + totalFruits);
+    }
+}

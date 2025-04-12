@@ -1,0 +1,247 @@
+A)J
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<html>
+<head>
+    <title>Voter Eligibility</title>
+</head>
+<body>
+    <form method="post">
+        Name: <input type="text" name="name"><br>
+        Age: <input type="number" name="age"><br>
+        <input type="submit" value="Check Eligibility">
+    </form>
+
+    <%
+        String name = request.getParameter("name");
+        String ageStr = request.getParameter("age");
+
+        if (name != null && ageStr != null) {
+            int age = Integer.parseInt(ageStr);
+            if (age >= 18) {
+                out.println("<h3>" + name + " is eligible for voting.</h3>");
+            } else {
+                out.println("<h3>" + name + " is NOT eligible for voting.</h3>");
+            }
+        }
+    %>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B)J
+import java.io.File;
+import java.io.FilenameFilter;
+
+public class FileExtensionFilter {
+    public static void main(String[] args) {
+        File directory = new File("C:/server_directory");
+        FilenameFilter filter = new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".txt"); 
+            }
+        };
+
+        String[] files = directory.list(filter);
+
+        if (files == null) {
+            System.out.println("Directory not found or it is empty.");
+        } else {
+            System.out.println("Files with .txt extension:");
+            for (String file : files) {
+                System.out.println(file);
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A) C#.
+using System;
+
+class ArraySum {
+    static void Main() {
+        int[] numbers = { 10, 20, 30, 40, 50 };
+        int sum = 0;
+
+        foreach (int num in numbers) {
+            sum += num;
+        }
+
+        Console.WriteLine("Sum of array elements: " + sum);
+    }
+}

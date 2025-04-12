@@ -1,0 +1,254 @@
+A)
+import java.util.*;
+
+public class EmployeeFilter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter number of employees:");
+        int n = scanner.nextInt();
+        scanner.nextLine(); 
+        String[] names = new String[n];
+        System.out.println("Enter employee names:");
+        for (int i = 0; i < n; i++) {
+            names[i] = scanner.nextLine();
+        }
+
+        System.out.println("Employees whose names start with 'A':");
+        for (String name : names) {
+            if (name.toUpperCase().startsWith("A")) {
+                System.out.println(name);
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B)j
+import java.applet.*;
+import java.awt.*;
+import java.util.Date;
+
+public class DigitalWatch extends Applet implements Runnable {
+    Thread t;
+    String time = "";
+
+    public void init() {
+        t = new Thread(this);
+        t.start();
+    }
+
+    public void run() {
+        while (true) {
+            Date d = new Date();
+            time = d.toString();
+            repaint();
+            try {
+                Thread.sleep(1000); // 1-second delay
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void paint(Graphics g) {
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString(time, 50, 100);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B) C#
+using System;
+
+class MatrixMultiplication {
+    static void Main() {
+        int[,] A = {
+            {1, 2},
+            {3, 4}
+        };
+
+        int[,] B = {
+            {5, 6},
+            {7, 8}
+        };
+
+        int[,] C = new int[2, 2];
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                C[i, j] = 0;
+                for (int k = 0; k < 2; k++) {
+                    C[i, j] += A[i, k] * B[k, j];
+                }
+            }
+        }
+
+        Console.WriteLine("Resultant Matrix:");
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                Console.Write(C[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+}

@@ -1,0 +1,269 @@
+A)
+<%@ page import="java.util.*" %>
+<html>
+<head><title>Number to Words</title></head>
+<body>
+    <form method="post">
+        Enter a number: <input type="text" name="number" />
+        <input type="submit" value="Convert" />
+    </form>
+
+    <%
+        String numStr = request.getParameter("number");
+        if(numStr != null){
+            String[] words = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
+            StringBuilder result = new StringBuilder();
+            for(char c : numStr.toCharArray()){
+                if(Character.isDigit(c)){
+                    result.append(words[c - '0']).append(" ");
+                }
+            }
+    %>
+    <p style="color:red"><%= result.toString() %></p>
+    <%
+        }
+    %>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A)#
+using System;
+
+class PrimeCheck {
+    static bool IsPrime(int num) {
+        if (num < 2) return false;
+        for (int i = 2; i <= Math.Sqrt(num); i++)
+            if (num % i == 0) return false;
+        return true;
+    }
+
+    static void Main() {
+        Console.Write("Enter a number: ");
+        int n = int.Parse(Console.ReadLine());
+        Console.WriteLine(IsPrime(n) ? "Prime" : "Not Prime");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B)
+Imports System.Data.OleDb
+
+Public Class Form1
+    Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=yourdb.accdb")
+    Dim da As OleDbDataAdapter
+    Dim ds As New DataSet()
+
+    Private Sub Insert_Click(sender As Object, e As EventArgs) Handles Insert.Click
+        Dim cmd As New OleDbCommand("INSERT INTO Author VALUES(?, ?, ?)", con)
+        cmd.Parameters.AddWithValue("?", TextBox1.Text)
+        cmd.Parameters.AddWithValue("?", TextBox2.Text)
+        cmd.Parameters.AddWithValue("?", TextBox3.Text)
+        con.Open()
+        cmd.ExecuteNonQuery()
+        con.Close()
+        MessageBox.Show("Record Inserted")
+        LoadData()
+    End Sub
+
+    Private Sub Delete_Click(sender As Object, e As EventArgs) Handles Delete.Click
+        Dim cmd As New OleDbCommand("DELETE FROM Author WHERE book_name='VB.NET book'", con)
+        con.Open()
+        cmd.ExecuteNonQuery()
+        con.Close()
+        MessageBox.Show("Deleted author with VB.NET book")
+        LoadData()
+    End Sub
+
+    Private Sub LoadData()
+        da = New OleDbDataAdapter("SELECT * FROM Author", con)
+        ds.Clear()
+        da.Fill(ds, "Author")
+        DataGridView1.DataSource = ds.Tables("Author")
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadData()
+    End Sub
+End Class

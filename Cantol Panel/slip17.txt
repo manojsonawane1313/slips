@@ -1,0 +1,209 @@
+A)j
+import java.util.Scanner;
+
+public class VowelDisplay {
+    public static void main(String[] args) throws InterruptedException {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
+
+        System.out.println("Displaying vowels after 3 seconds...");
+        Thread.sleep(3000);
+
+        for (char c : input.toCharArray()) {
+            if ("AEIOUaeiou".indexOf(c) != -1) {
+                System.out.println(c);
+            }
+        }
+        sc.close();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A) C#
+using System;
+
+class VowelExtractor {
+    static void Main() {
+        Console.Write("Enter a string: ");
+        string input = Console.ReadLine();
+        
+        foreach (char c in input) {
+            if ("AEIOUaeiou".Contains(c)) {
+                Console.WriteLine(c);
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B).
+Imports System.Data.SqlClient
+
+Public Class ProductForm
+    Dim con As New SqlConnection("Data Source=.\SQLEXPRESS;Initial Catalog=ProductDB;Integrated Security=True")
+    
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim cmd As New SqlCommand("INSERT INTO Products (PID, PName, expiry_date, price) VALUES (@pid, @pname, @expiry, @price)", con)
+        cmd.Parameters.AddWithValue("@pid", txtPID.Text)
+        cmd.Parameters.AddWithValue("@pname", txtPName.Text)
+        cmd.Parameters.AddWithValue("@expiry", dtpExpiry.Value)
+        cmd.Parameters.AddWithValue("@price", txtPrice.Text)
+
+        con.Open()
+        cmd.ExecuteNonQuery()
+        con.Close()
+        MessageBox.Show("Product Saved")
+        LoadData()
+    End Sub
+
+    Private Sub LoadData()
+        Dim adapter As New SqlDataAdapter("SELECT * FROM Products", con)
+        Dim table As New DataTable()
+        adapter.Fill(table)
+        DataGridView1.DataSource = table
+    End Sub
+End Class

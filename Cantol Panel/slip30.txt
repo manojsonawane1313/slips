@@ -1,0 +1,452 @@
+A)j
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<html>
+<head><title>Reverse String</title></head>
+<body>
+    <form method="post">
+        Enter a string: <input type="text" name="inputStr">
+        <input type="submit" value="Submit">
+    </form>
+
+    <%
+        String str = request.getParameter("inputStr");
+        if (str != null) {
+            String reversed = new StringBuilder(str).reverse().toString();
+            out.println("<h3>Reversed String: " + reversed + "</h3>");
+        }
+    %>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b)j
+import java.applet.Applet;
+import java.awt.*;
+import java.util.concurrent.TimeUnit;
+
+public class CarAnimation extends Applet implements Runnable {
+    int x = 0;
+    Thread t;
+
+    public void init() {
+        setSize(800, 400);
+        t = new Thread(this);
+        t.start();
+    }
+
+    public void run() {
+        while (true) {
+            x += 5;
+            if (x > getWidth()) {
+                x = -100; 
+            }
+            repaint();
+
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void paint(Graphics g) {
+        g.setColor(Color.blue);
+        g.fillRect(x, 200, 100, 40);
+
+        g.setColor(Color.black);
+        g.fillOval(x + 10, 240, 20, 20);
+        g.fillOval(x + 70, 240, 20, 20);
+
+        g.setColor(Color.cyan);
+        g.fillRect(x + 20, 180, 60, 20);
+    }
+}
+
+*
+<html>
+  <body>
+	<applet code="caranimation.class" width="800" height="400">
+	</applet>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A).
+Public Class Form1
+    Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+        Dim basicSalary As Decimal = Decimal.Parse(txtBasic.Text)
+        Dim hra As Decimal = Decimal.Parse(txtHRA.Text)
+        Dim da As Decimal = Decimal.Parse(txtDA.Text)
+        Dim deduction As Decimal = Decimal.Parse(txtDeduction.Text)
+        Dim name As String = txtName.Text
+
+        Dim netSalary As Decimal = basicSalary + hra + da - deduction
+        txtNetSalary.Text = netSalary.ToString("F2")
+
+        MessageBox.Show("Employee Name: " & name & vbCrLf & "Net Salary: " & netSalary.ToString("F2"), "Net Salary Info")
+    End Sub
+End Class
+Design Requirements:
+
+TextBoxes: txtName, txtBasic, txtHRA, txtDA, txtDeduction, txtNetSalary
+
+Button: btnSubmit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B).
+Imports System.Data.OleDb
+
+Public Class Form1
+    Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\suppliers.accdb")
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Dim cmd As New OleDbCommand("INSERT INTO Supplier (SupID, SupName, Phone, Address) VALUES (?, ?, ?, ?)", con)
+        cmd.Parameters.AddWithValue("?", txtID.Text)
+        cmd.Parameters.AddWithValue("?", txtName.Text)
+        cmd.Parameters.AddWithValue("?", txtPhone.Text)
+        cmd.Parameters.AddWithValue("?", txtAddress.Text)
+
+        con.Open()
+        cmd.ExecuteNonQuery()
+        con.Close()
+
+        MessageBox.Show("Supplier Added Successfully!")
+        DisplayData()
+    End Sub
+
+    Private Sub DisplayData()
+        Dim da As New OleDbDataAdapter("SELECT * FROM Supplier", con)
+        Dim dt As New DataTable()
+        da.Fill(dt)
+        DataGridView1.DataSource = dt
+    End Sub
+End Class
