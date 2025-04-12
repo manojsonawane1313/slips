@@ -1,0 +1,150 @@
+S-22
+Q1 A)
+
+Client code:
+import java.net.*;
+import java.io.*;
+import java.util.*;
+class s14q1Client
+{
+	public static void main(String[] a)throws IOException
+	{
+		Socket st=new Socket("localhost",5917);
+		DataInputStream dis=new DataInputStream(st.getInputStream());
+		String d=dis.readUTF()+"";
+		System.out.println("date:"+d);
+	}
+}
+Server code:
+import java.net.*;
+import java.io.*;
+import java.util.*;
+class s14q1Server
+{
+	public static void main(String[] a)throws IOException
+	{
+		ServerSocket st=new ServerSocket(5917);
+		Socket s= st.accept();
+		DataOutputStream dos=new DataOutputStream(s.getOutputStream());
+		Date d=new Date();
+		System.out.println("date:"+d);
+		dos.writeUTF(d+"");
+	}
+}
+
+Q1 B)
+<html>
+<body>
+<h2>Enter Account Details</h2>
+<form method='post' action='saveAccount.jsp'>
+<table>
+<tr>
+    <td><b>Account No:</b></td>
+    <td><input type='text' name='ano'></td>
+</tr>
+<tr>
+    <td><b>Account Type:</b></td>
+    <td>
+        <select name='type'>
+            <option value=''>Select Type</option>
+            <option value='Saving'>Saving</option>
+            <option value='Current'>Current</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td><b>Balance:</b></td>
+    <td><input type='text' name='bal'></td>
+</tr>
+<tr>
+    <td><input type='submit' value='Submit'></td>
+    <td><input type='reset' value='Reset'></td>
+</tr>
+</table>
+</form>
+<br>
+<a href='view_accounts.jsp'>View Accounts</a>
+</body>
+</html>
+<%@ page import="java.sql.*" errorPage="err.jsp" %>
+<%
+try {
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb", "root", "");
+
+    int ano = Integer.parseInt(request.getParameter("ano"));
+    String type = request.getParameter("type");
+    float bal = Float.parseFloat(request.getParameter("bal"));
+
+    PreparedStatement ps = con.prepareStatement("INSERT INTO account VALUES (?, ?, ?)");
+    ps.setInt(1, ano);
+    ps.setString(2, type);
+    ps.setFloat(3, bal);
+    ps.executeUpdate();
+%>
+    <p><b>Account created successfully.</b></p>
+    <a href='saveAccount.html'>Add Another Account</a> |
+    <a href='view_accounts.jsp'>View Accounts</a>
+<%
+} catch (Exception e) {
+    throw new ServletException(e);
+}
+%>
+
+
+Q2 A)
+using System;
+class Program
+{
+        static void Swap(ref int a, ref int b)
+    {
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+    static void Main(string[] args)
+    {
+        int num1 = 10, num2 = 20;
+        Console.WriteLine("Before Swap:");
+        Console.WriteLine("num1 = " + num1 + ", num2 = " + num2);
+
+        // Call the swap function
+        Swap(ref num1, ref num2);
+
+        Console.WriteLine("After Swap:");
+        Console.WriteLine("num1 = " + num1 + ", num2 = " + num2);
+
+        Console.ReadLine();
+    }
+}
+
+Q2 B)
+Public Class Form1
+Private Sub RedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RedToolStripMenuItem.Click
+Me.BackColor = Color.Red
+End Sub
+
+Private Sub BlueToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BlueToolStripMenuItem.Click
+Me.BackColor = Color.Blue
+End Sub
+
+Private Sub GreenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GreenToolStripMenuItem.Click
+Me.BackColor = Color.Green
+End Sub
+
+Private Sub MaximiseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MaximiseToolStripMenuItem.Click
+Me.WindowState = FormWindowState.Maximized
+End Sub
+
+Private Sub MinimiseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MinimiseToolStripMenuItem.Click
+Me.WindowState = FormWindowState.Minimized
+End Sub
+
+Private Sub RestoreToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestoreToolStripMenuItem.Click
+Me.WindowState = FormWindowState.Normal
+End Sub
+
+Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+End
+End Sub
+

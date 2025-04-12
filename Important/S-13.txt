@@ -1,0 +1,141 @@
+S-13
+Q1 A)
+import java.util.*;
+public class Slip13_q1 extends Thread {
+	public void run()
+	{
+		for(int i=0;i<5;i++)
+		{
+			System.out.println("The thread name is "+Thread.currentThread().getName());
+		}
+	}
+	public static void main(String []args)
+	{
+		Slip13_q1 t1= new Slip13_q1();
+		t1.setName("Main Thread");
+		t1.start();
+		Thread t2 = currentThread();
+		t2.setName("Current thread");
+		for(int i=0;i<5;i++)
+		{
+			System.out.println("The thread name is "+t1.currentThread().getName());
+		}
+	}
+}
+
+Q1 B)
+Index.html file:
+<html>
+      <head>
+            <title> College Details
+            </title>
+	  </head>
+	  <body>
+	  <form name="f1" method="post" action="college.jsp">
+	 <input type="submit" name="s1" value="Show">	 
+</form>
+ </body>
+</html>
+
+College.jsp file:
+<%@page import="java.sql.*"%> 
+<%
+if(request.getParameter("s1")!=null)
+  {
+		Connection con;
+		Statement st;
+		String query;
+		ResultSet rs;
+		Class.forName("com.mysql.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");
+		st = con.createStatement();
+		query = "select * from college";
+		rs = st.executeQuery(query);
+%>
+<table border=l> 
+<tr><th>Roll No</th><th>Name</th><th>Address </th></tr> 
+<%
+while(rs.next()) 
+{
+%>
+<tr> 
+<td><%=rs.getInt("Roll No")%></td> 
+<td><%=rs.getString("Name")%></td> 
+<td><%=rs.getString("Address")%></td> 
+</tr> 
+<%
+}
+	st.close();		
+	con.close();
+}
+%>
+ </table>
+
+Q2 A)
+Public Class Form1
+    Private Sub Timer1_Tick_1(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If PictureBox1.Visible Then
+            PictureBox1.Visible = False
+        Else
+            PictureBox1.Visible = True
+        End If
+    End Sub
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Timer1.Enabled = True
+        Timer1.Interval = 1000
+        Timer1.Start()
+    End Sub
+End Class
+
+
+Q2 B)
+using System;
+class Student
+{
+    public int RollNo;
+    public string Name;
+    public int[] Marks = new int[3];
+    public float Percentage;
+    public void Accept()
+    {
+        Console.Write("Enter Roll No: ");
+        RollNo = int.Parse(Console.ReadLine());
+        Console.Write("Enter Name: ");
+        Name = Console.ReadLine();
+        int total = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            Console.Write("Enter Marks for Subject {0}: ", i + 1);
+            Marks[i] = int.Parse(Console.ReadLine());
+            total += Marks[i];
+        }
+        Percentage = (float)total / 3;
+    }
+    public void Display()
+    {
+        Console.WriteLine("\nRoll No: " + RollNo);
+        Console.WriteLine("Name: " + Name);
+        Console.WriteLine("Marks: {0}, {1}, {2}", Marks[0], Marks[1], Marks[2]);
+        Console.WriteLine("Percentage: " + Percentage + "%");
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter number of students: ");
+        int n = int.Parse(Console.ReadLine());
+        Student[] students = new Student[n];
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine("\nEnter details for student {0}", i + 1);
+            students[i] = new Student();
+            students[i].Accept();
+        }
+        Console.WriteLine("\n--- Student Details ---");
+        for (int i = 0; i < n; i++)
+        {
+            students[i].Display();
+        }
+    }
+}

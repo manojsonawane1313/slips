@@ -1,0 +1,110 @@
+S-11
+Q1 A)
+import java.net.*;
+public class IPTest
+{
+	public static void main(String args[])throws UnknownHostException
+	{
+		InetAddress addr=InetAddress.getLocalHost();
+		String ipAddress=addr.getHostAddress();
+		System.out.println("IP Address of localhost from Java Program:"+ ipAddress);
+		String hostname=addr.getHostName();
+		System.out.println("Name of hostname:"+hostname);
+	}
+}
+
+Q1 B)
+import java.sql.*;
+public class Slip11_1_B {
+	public static void main(String [] args) throws Exception 
+	{
+	Connection con;
+	Statement st;
+	String query;
+	ResultSet rs;
+	Class.forName("com.mysql.jdbc.Driver");  
+	con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root",""); 
+	st=con.createStatement();  	query="Select * from Product,Sales where Product.PID=Sales.Product_PID And Product.PID=101 And Sdate between '2022/05/20' and '2022/05/30';"; 
+	
+	rs=st.executeQuery(query); 	while(rs.next())
+	{
+	 System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getInt(3)+" "+rs.getInt(4)+" "+rs.getInt(5)+" "+rs.getDate(7));
+	}
+	st.close();		
+	con.close();
+	
+	}
+}
+
+
+Q2 A)
+<%@ Page Language="C#" %>
+<html>
+<body>
+<form runat="server">
+    Name: <asp:TextBox ID="txtName" runat="server" /><br /><br />
+    Payment Mode: <asp:DropDownList ID="ddlPay" runat="server">
+        <asp:ListItem>--Select--</asp:ListItem>
+        <asp:ListItem>Credit</asp:ListItem>
+        <asp:ListItem>Debit</asp:ListItem>
+    </asp:DropDownList><br /><br />
+    Card No: <asp:TextBox ID="txtCard" runat="server" /><br /><br />
+    <asp:Button ID="btnValidate" runat="server" Text="Validate" OnClick="Validate_Click" /><br /><br />
+    <asp:Label ID="lblMsg" runat="server" ForeColor="Red" />
+</form>
+<script runat="server">
+    protected void Validate_Click(object sender, EventArgs e)
+    {
+        if (txtName.Text == "" || ddlPay.SelectedIndex == 0 || txtCard.Text == "")
+            lblMsg.Text = "All fields are required!";
+        else if (!long.TryParse(txtCard.Text, out _))
+            lblMsg.Text = "Card number must be numeric!";
+        else
+            lblMsg.Text = "Valid input!";
+    }
+</script>
+</body>
+</html>
+
+Q2 B)
+using System;
+class Fruit
+{
+    protected int totalFruits = 0;
+    public virtual void AddFruits(int count)
+    {
+        totalFruits += count;
+    }
+    public void DisplayTotalFruits()
+    {
+        Console.WriteLine("Total fruits in basket: " + totalFruits);
+    }
+}
+class Apples : Fruit
+{
+    public void AddApples(int count)
+    {
+        Console.WriteLine("Number of apples: " + count);
+        AddFruits(count);
+    }
+}
+class Mangoes : Fruit
+{
+    public void AddMangoes(int count)
+    {
+        Console.WriteLine("Number of mangoes: " + count);
+        AddFruits(count);
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        Apples apples = new Apples();
+        Mangoes mangoes = new Mangoes();
+        apples.AddApples(5);
+        mangoes.AddMangoes(3);
+        apples.DisplayTotalFruits();
+    }
+}
+

@@ -1,0 +1,168 @@
+S-24
+Q1 A)
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number to Words</title>
+</head>
+<body>
+    <h2>Enter a Number:</h2>
+    <form method="post">
+        <input type="text" name="number" required />
+        <input type="submit" value="Convert" />
+    </form>
+
+    <%
+        String input = request.getParameter("number");
+        if (input != null && input.matches("\\d+")) {
+            String[] digitWords = {"Zero", "One", "Two", "Three", "Four", 
+                                   "Five", "Six", "Seven", "Eight", "Nine"};
+            StringBuilder wordOutput = new StringBuilder();
+            for (char ch : input.toCharArray()) {
+                int digit = Character.getNumericValue(ch);
+                wordOutput.append(digitWords[digit]).append(" ");
+            }
+    %>
+        <h3 style="color: red;">Output: <%= wordOutput.toString() %></h3>
+    <%
+        } else if (input != null) {
+    %>
+        <p style="color:red;">Please enter digits only.</p>
+    <%
+        }
+    %>
+</body>
+</html>
+
+Q1 B)
+import java.sql.*;
+import java.util.*;
+
+public class EmpApp {
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        Connection con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/dbname", "root", "password");
+        int ch;
+        do {
+            System.out.println("\n1.Insert 2.Update 3.Delete 4.Search 5.Display 6.Exit");
+            System.out.print("Enter choice: ");
+            ch = sc.nextInt();
+            PreparedStatement pst;
+            switch (ch) {
+                case 1:
+                    System.out.print("ENo EName Salary Desg: ");
+                    pst = con.prepareStatement("INSERT INTO Emp VALUES (?, ?, ?, ?)");
+                    pst.setInt(1, sc.nextInt());
+                    pst.setString(2, sc.next());
+                    pst.setDouble(3, sc.nextDouble());
+                    pst.setString(4, sc.next());
+                    pst.executeUpdate();
+                    System.out.println("Inserted.");
+                    break;
+                case 2:
+                    System.out.print("ENo to update: ");
+                    int eno = sc.nextInt();
+                    System.out.print("New EName Salary Desg: ");
+                    pst = con.prepareStatement("UPDATE Emp SET EName=?, Salary=?, Desg=? WHERE ENo=?");
+                    pst.setString(1, sc.next());
+                    pst.setDouble(2, sc.nextDouble());
+                    pst.setString(3, sc.next());
+                    pst.setInt(4, eno);
+                    pst.executeUpdate();
+                    System.out.println("Updated.");
+                    break;
+                case 3:
+                    System.out.print("ENo to delete: ");
+                    pst = con.prepareStatement("DELETE FROM Emp WHERE ENo=?");
+                    pst.setInt(1, sc.nextInt());
+                    pst.executeUpdate();
+                    System.out.println("Deleted.");
+                    break;
+                case 4:
+                    System.out.print("ENo to search: ");
+                    pst = con.prepareStatement("SELECT * FROM Emp WHERE ENo=?");
+                    pst.setInt(1, sc.nextInt());
+                    ResultSet rs = pst.executeQuery();
+                    if (rs.next())
+                        System.out.println(rs.getInt(1) + " " + rs.getString(2) + 
+                                           " " + rs.getDouble(3) + " " + rs.getString(4));
+                    else System.out.println("Not found.");
+                    break;
+                case 5:
+                    rs = con.createStatement().executeQuery("SELECT * FROM Emp");
+                    while (rs.next())
+                        System.out.println(rs.getInt(1) + " " + rs.getString(2) +
+                                           " " + rs.getDouble(3) + " " + rs.getString(4));
+                    break;
+            }
+        } while (ch != 6);
+        con.close();
+        sc.close();
+    }
+}
+
+Q2 A)
+namespace WinFormsApp26
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        public static string prime(int a)
+        {
+            if (a <= 1)
+                return a + " is Not Prime Number";
+            bool isprime = true;
+            for (int i = 2; i <= a / 2; i++)
+            {
+                if (a % i == 0)
+                {
+                    isprime = false;
+                    break;
+                }
+            }
+            if (isprime)
+                return a + " is Prime Number";
+            else
+                return a + " is Not Prime Number";
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(prime(Convert.ToInt32(textBox1.Text)));
+        }
+    }
+}
+
+Q2 B)
+Imports System.Data.OleDb
+Public Class Form1
+    Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Library.accdb")
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        con.Open()
+        Dim authors = {
+            "INSERT INTO Author VALUES (1,'Amit','C#')",
+            "INSERT INTO Author VALUES (2,'Neha','Java')",
+            "INSERT INTO Author VALUES (3,'Sana','VB.NET book')",
+            "INSERT INTO Author VALUES (4,'Ravi','Python')",
+            "INSERT INTO Author VALUES (5,'Anu','SQL')"
+        }
+        For Each q In authors
+            Try
+                New OleDbCommand(q, con).ExecuteNonQuery()
+            Catch ex As Exception
+            End Try
+        Next
+                New OleDbCommand("DELETE FROM Author WHERE book_name='VB.NET book'", con).ExecuteNonQuery()
+                Dim da As New OleDbDataAdapter("SELECT * FROM Author", con)
+        Dim dt As New DataTable()
+        da.Fill(dt)
+        DataGridView1.DataSource = dt
+        con.Close()
+    End Sub
+End Class
+

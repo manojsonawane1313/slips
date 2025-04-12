@@ -1,0 +1,106 @@
+S-28
+Q1 A)
+class Counter {
+    int count = 0;
+    synchronized void increment() {
+        count++;
+        System.out.println("Count: " + count);
+    }
+}
+public class SyncDemo {
+    public static void main(String[] args) {
+        Counter c = new Counter();
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 5; i++) c.increment();
+        });
+        Thread t2 = new Thread(() -> {
+            for (int i = 0; i < 5; i++) c.increment();
+        });
+        t1.start();
+        t2.start();
+    }
+}
+
+Q1 B)
+import java.awt.*;
+import java.awt.event.*;
+
+public class EmployeeApp extends Frame implements ItemListener {
+    Choice empChoice = new Choice();
+    Label details = new Label();
+    String[][] empData = {
+        {"1", "Anushka", "50000"},
+        {"1", "Sakshi", "60000"},
+        {"1", "Roshi", "55000"}
+    };
+    EmployeeApp() {
+        setLayout(new FlowLayout());
+        add(new Label("Select Emp No:"));
+        for (String[] emp : empData)
+            empChoice.add(emp[0]);
+        empChoice.addItemListener(this);
+        add(empChoice);
+        add(details);
+        setSize(300, 200);
+        setVisible(true);
+    }
+    public void itemStateChanged(ItemEvent e) {
+        for (String[] emp : empData)
+            if (emp[0].equals(empChoice.getSelectedItem()))
+                details.setText("ENo: " + emp[0] + ", Name: " + emp[1] + ", Salary: " + emp[2]);
+    }
+    public static void main(String[] args) {
+        new EmployeeApp();
+    }
+}
+
+Q2 A)
+namespace WinFormsApp23
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Add(textBox1.Text);
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            listBox2.Items.Clear();
+           for (int i = listBox1.Items.Count-1; i >= 0; i--)
+            {
+                listBox2.Items.Add (listBox1.Items[i]);
+            }
+        }
+    }
+}
+ Q2 B)
+Imports System.Data.OleDb
+
+Public Class Form1
+    Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Hospital.accdb")
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        con.Open()
+        Dim patients = {
+            "INSERT INTO Patient VALUES (1,'Amit','98765','Flu')",
+            "INSERT INTO Patient VALUES (2,'Neha','12345','Cold')",
+            "INSERT INTO Patient VALUES (3,'Ravi','23456','Fever')",
+            "INSERT INTO Patient VALUES (4,'Anu','34567','Cough')",
+            "INSERT INTO Patient VALUES (5,'Sana','45678','Injury')"
+        }
+        For Each q In patients
+            Try
+                New OleDbCommand(q, con).ExecuteNonQuery()
+                MessageBox.Show("Inserted")
+            Catch ex As Exception
+            End Try
+        Next
+        con.Close()
+    End Sub
+End Class
+
+
+

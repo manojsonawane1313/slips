@@ -1,0 +1,113 @@
+S-21
+Q1 A)
+class Slip21
+{
+public static void main(String a[])
+{
+String S;
+int p;
+Thread t = Thread.currentThread();
+S = t.getName();
+System.out.println("\n Current Thread name : "+S);
+p = t.getPriority();
+System.out.println("\n Current thread priority : "+p);
+}
+}
+
+Q1 B)
+STUDENT.HTML
+<html>
+<body>
+<h2>Student Result Form</h2>
+<form method="post" action="Stud">
+    Seat No: <input type="text" name="txtsno"><br><br>
+    Name: <input type="text" name="txtnm"><br><br>
+    Class: <input type="text" name="txtclass"><br><br>
+    Subject 1 Marks: <input type="text" name="txtsub1"><br><br>
+    Subject 2 Marks: <input type="text" name="txtsub2"><br><br>
+    Subject 3 Marks: <input type="text" name="txtsub3"><br><br>
+    <input type="submit" value="Show Result">
+</form>
+</body>
+</html>
+STUDENT.JAVA
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class Student extends HttpServlet {
+    public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+        int s1 = Integer.parseInt(req.getParameter("txtsub1"));
+        int s2 = Integer.parseInt(req.getParameter("txtsub2"));
+        int s3 = Integer.parseInt(req.getParameter("txtsub3"));
+        int total = s1 + s2 + s3;
+        float per = total / 3.0f;
+
+        String grade;
+        if (per >= 60) grade = "First Class";
+        else if (per >= 55) grade = "Higher Second Class";
+        else if (per >= 50) grade = "Second Class";
+        else grade = "Pass Class";
+
+        res.setContentType("text/html");
+        PrintWriter out = res.getWriter();
+        out.println("<html><body>");
+        out.println("<h2>Student Result</h2>");
+        out.println("Seat No: " + req.getParameter("txtsno") + "<br>");
+        out.println("Name: " + req.getParameter("txtnm") + "<br>");
+        out.println("Class: " + req.getParameter("txtclass") + "<br>");
+        out.println("Total Marks: " + total + "<br>");
+        out.println("Percentage: " + per + "%<br>");
+        out.println("Grade: " + grade + "<br>");
+        out.println("</body></html>");
+    }
+}
+
+
+Q2 A)
+Public Class Form1
+Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+Dim s1 As String
+Dim wcnt As Integer = 0
+For Each s1 In TextBox1.Text
+If s1 = " " Then
+wcnt = wcnt + 1
+End If
+Next
+MsgBox("Word count in the sentense is : " & wcnt)
+End Sub
+End Class
+
+Q2 B)
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+namespace Slip21A
+{
+public partial class WebForm1 : System.Web.UI.Page
+{
+protected void Page_Load(object sender, EventArgs e)
+{
+SqlConnection con = new SqlConnection ("Data Source=DESKTOP-EI9MKP4\SQLEXPRESS;Initial Catalog=SlipDB;Integrated Security=True");
+con.Open();
+}
+protected void Button1_Click(object sender, EventArgs e)
+{
+string sql1 = "insert into emp values(" + Convert.ToInt32(TextBox1.Text) + ",'" + TextBox2.Text + "','" + TextBox3.Text + "'," + TextBox4.Text + ",'" + TextBox5.Text + "')";
+SqlCommand cmd = new SqlCommand(sql1, con);
+int cnt = cmd.ExecuteNonQuery();
+Label8.Text = cnt + " row inserted";
+}
+protected void Button2_Click(object sender, EventArgs e)
+{
+string sql2 = "update emp set Salary =" + TextBox7.Text + "where Empno=" TextBox4.Text;
+SqlCommand cmd = new SqlCommand(sql2, con);
+int cnt1=cmd.ExecuteNonQuery();
+Label8.Text = cnt1 + " row updated";
+}
+}
+}

@@ -1,0 +1,134 @@
+S-8
+Q1 A)
+import java.sql.*;  //step 1 - import the package
+public class selectEmployee
+{
+	public static void main(String args[]) throws Exception
+	{
+	Connection con;
+	Statement st;
+	String query;
+	ResultSet rs;
+	Class.forName("com.mysql.jdbc.Driver"); 	con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");	st=con.createStatement();  	query="select * from emp where ename like 'A%'"; 
+	rs=st.executeQuery(query); 	while(rs.next())
+	{
+	System.out.println(rs.getInt("eid") + rs.getString("ename") + rs.getInt("esal"));
+	}
+	st.close();		
+	con.close();
+	}
+}
+
+Q1 B)
+import java.applet.*;  
+import java.awt.*;  
+import java.util.*;  
+import java.text.*;  
+public class DigitalClock extends Applet implements Runnable {  
+   Thread t = null;  
+   int hours=0, minutes=0, seconds=0;  
+   String timeString = "";  
+   public void init() {  
+      setBackground( Color.green);  
+   }  
+   public void start() {  
+        t = new Thread( this );  
+        t.start();  
+   }  
+   public void run() {  
+      try {  
+         while (true) {  
+            Calendar cal = Calendar.getInstance();  
+            hours = cal.get( Calendar.HOUR_OF_DAY );  
+            if ( hours > 12 ) hours -= 12;  
+            minutes = cal.get( Calendar.MINUTE );  
+            seconds = cal.get( Calendar.SECOND );  
+            SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss");  
+            Date date = cal.getTime();  
+            timeString = formatter.format( date );  
+            repaint();  
+            t.sleep( 1000 );  
+         }  
+      }  
+      catch (Exception e) { }  
+   }  
+  public void paint( Graphics g ) {  
+      g.setColor( Color.blue );  
+      g.drawString( timeString, 50, 50 );  
+   }  
+}
+/* <APPLET code="DigitalClock.class" width="300" height="300" >
+  </APPLET> */
+
+Q2 A)
+
+<%@ Page Language="VB" %>
+
+<script runat="server">
+    Protected Sub btnSel_Click(sender As Object, e As EventArgs)
+        txt.Text = ""
+        For Each item In lst.Items
+            If item.Selected Then txt.Text &= item.Text & vbCrLf
+        Next
+    End Sub
+
+    Protected Sub btnAll_Click(sender As Object, e As EventArgs)
+        txt.Text = ""
+        For Each item In lst.Items
+            txt.Text &= item.Text & vbCrLf
+        Next
+    End Sub
+</script>
+
+<html>
+<head><title>Employee Transfer</title></head>
+<body>
+    <form runat="server">
+        <asp:ListBox ID="lst" runat="server" SelectionMode="Multiple">
+            <asp:ListItem>Ravi</asp:ListItem>
+            <asp:ListItem>Seeta</asp:ListItem>
+            <asp:ListItem>Amit</asp:ListItem>
+        </asp:ListBox><br /><br />
+
+        <asp:Button ID="btnSel" runat="server" Text="Add Selected" OnClick="btnSel_Click" />
+        <asp:Button ID="btnAll" runat="server" Text="Add All" OnClick="btnAll_Click" /><br /><br />
+
+        <asp:TextBox ID="txt" runat="server" TextMode="MultiLine" Rows="5" Columns="30" />
+    </form>
+</body>
+</html>
+
+Q2 B)
+using System;
+class MatrixMultiplication
+{
+    static void Main()
+    {
+        int[,] A = { { 1, 2 }, { 3, 4 } };
+        int[,] B = { { 2, 0 }, { 1, 2 } };
+        int[,] result = new int[2, 2];
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j = 0; j < 2; j++)
+            {
+                result[i, j] = 0;
+                for (int k = 0; k < 2; k++)
+                {
+                    result[i, j] += A[i, k] * B[k, j];
+                }
+            }
+        }
+        Console.WriteLine("Multiplication of matrices:");
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j = 0; j < 2; j++)
+            {
+                Console.Write(result[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+        Console.ReadLine();
+    }
+}
+
+

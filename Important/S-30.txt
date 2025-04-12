@@ -1,0 +1,81 @@
+S-30
+Q1 A)
+<%@ page language="java" %>
+<html>
+<body>
+    <form method="post">
+        Enter a String: <input type="text" name="inputString"><br><br>
+        <input type="submit" value="Reverse">
+    </form>
+    <br><br>
+    <%
+       String inputString = request.getParameter("inputString");
+        if (inputString != null && !inputString.isEmpty()) {
+            String reversedString = new StringBuilder(inputString).reverse().toString();
+            out.println("Original String: " + inputString + "<br>");
+            out.println("Reversed String: " + reversedString);
+        }
+    %>
+</body>
+</html>
+
+Q1 B)
+import java.applet.*;
+import java.awt.*;
+public class MovingCar extends Applet implements Runnable {
+    int x = 0;
+    Thread t;
+    public void start() {
+        t = new Thread(this);
+        t.start();
+    }
+    public void run() {
+        while (true) {
+            x = (x + 10) % getWidth(); // Move car horizontally
+            repaint();
+            try { Thread.sleep(100); } catch (Exception e) {}
+        }
+    }
+    public void paint(Graphics g) {
+        setBackground(Color.cyan);
+        g.setColor(Color.black);
+        g.fillRect(0, 100, getWidth(), 30); // Road
+        g.setColor(Color.red);
+        g.fillRoundRect(x, 90, 40, 20, 10, 10); // Car
+    }
+}
+
+Q2 A)
+Public Class Form1
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim netsal As Double
+        netsal = Val(TextBox2.Text) + Val(TextBox3.Text) + Val(TextBox4.Text) + Val(TextBox5.Text) + Val(TextBox6.Text) + Val(TextBox7.Text) + Val(TextBox8.Text)
+        TextBox9.Text = netsal
+        MsgBox("Name : " & TextBox1.Text & vbNewLine & "Net Salary : " & netsal)
+    End Sub
+End Class
+
+Q2 B)
+Imports System.Data.SqlClient
+Public Class Form1
+    Dim con As New SqlConnection("Data Source=DESKTOP-EI9MKP4\SQLEXPRESS;Initial Catalog=SlipDB;Integrated Security=True")
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim cmd As New SqlCommand("INSERT INTO Supplier VALUES (@id, @name, @ph, @addr)", con)
+        cmd.Parameters.AddWithValue("@id", TextBox1.Text)
+        cmd.Parameters.AddWithValue("@name", TextBox2.Text)
+        cmd.Parameters.AddWithValue("@ph", TextBox3.Text)
+        cmd.Parameters.AddWithValue("@addr", TextBox4.Text)
+        con.Open()
+        cmd.ExecuteNonQuery()
+        con.Close()
+        MsgBox("Inserted")
+    End Sub
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim adpt As New SqlDataAdapter("SELECT * FROM Supplier", con)
+        Dim dt As New DataTable
+        adpt.Fill(dt)
+        DataGridView1.DataSource = dt
+    End Sub
+End Class
+

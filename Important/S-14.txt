@@ -1,0 +1,143 @@
+S-14
+Q1 A)
+Slip18.html
+<html>
+<form method="post" action="slip18.jsp">
+Enter name:<input type="text" name="name">
+Enter age:<input type="text" name="age">
+<input type="submit" value="Check">
+</form>
+</html>
+Slip18.jsp	
+<html>
+	<body>
+		<font color=red>
+		<%
+			String name=request.getParameter("name");
+			String age=request.getParameter("age");
+
+			int ag=Integer.parseInt(age);
+			if(ag>=18)
+				out.println("voter is eligiable for voting");
+			else
+				out.println("voter is not eligiable for voting");
+		%>
+</font>
+</body>
+</html>
+
+Q1 B)
+import java.io.File;
+import java.util.Scanner;
+public class ListFilesByExtension {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter directory path: ");
+        String dirPath = scanner.nextLine();
+                System.out.print("Enter file extension (without dot): ");
+        String extension = scanner.nextLine();
+        File folder = new File(dirPath);
+        if (!folder.exists() || !folder.isDirectory()) {
+            System.out.println("Invalid directory path.");
+            return;
+        }
+        File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith("." + extension.toLowerCase()));
+        System.out.println("\nFiles with ." + extension + " extension:");
+        if (files != null && files.length > 0) {
+            for (File file : files) {
+                System.out.println(file.getName());
+            }
+        } else {
+            System.out.println("No files found with ." + extension + " extension.");
+        }
+        scanner.close();
+    }
+}
+
+Q2 A)
+namespace WinFormsApp27
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Add(textBox1.Text);
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int a,b=0,c;
+            for(int i = 0; i < listBox1.Items.Count; i++)
+            {
+                a = Convert.ToInt32(listBox1.Items[i]);
+                c = a + b;
+                b = c;
+            }
+            MessageBox.Show("Addtion is : " + b);
+        }
+    }
+}
+
+Q2 B)
+using System;
+class Person
+{
+    public string Name;
+    public string Address;
+    public void GetPersonDetails()
+    {
+        Console.Write("Enter Name: ");
+        Name = Console.ReadLine();
+        Console.Write("Enter Address: ");
+        Address = Console.ReadLine();
+    }
+    public void ShowPersonDetails()
+    {
+        Console.WriteLine("Name: " + Name);
+        Console.WriteLine("Address: " + Address);
+    }
+}
+class Employee : Person
+{
+    public string Staffed;
+    public double Salary;
+    public void GetEmployeeDetails()
+    {
+        GetPersonDetails();
+        Console.Write("Enter Staffed Position: ");
+        Staffed = Console.ReadLine();
+        Console.Write("Enter Salary: ");
+        Salary = Convert.ToDouble(Console.ReadLine());
+    }
+    public void ShowEmployeeDetails()
+    {
+        ShowPersonDetails();
+        Console.WriteLine("Staffed: " + Staffed);
+        Console.WriteLine("Salary: " + Salary);
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter number of employees: ");
+        int n = Convert.ToInt32(Console.ReadLine());
+        Employee[] empList = new Employee[n];
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine($"\nEnter details for Employee {i + 1}:");
+            empList[i] = new Employee();
+            empList[i].GetEmployeeDetails();
+        }
+        Console.WriteLine("Employee Details");
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine($"\nEmployee {i + 1}:");
+            empList[i].ShowEmployeeDetails();
+        }
+    }
+}
+

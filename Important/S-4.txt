@@ -1,0 +1,217 @@
+S-4
+Q1 A)
+import java.sql.*;  
+public class DeleteStudent
+{
+public static void main(String args[]) throws Exception
+	{
+	Connection con;
+	Statement st;
+	String query;
+	Class.forName("com.mysql.jdbc.Driver");  
+	con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root",""); 
+	st=con.createStatement();  
+	query="delete from college where Name like 'S%'"; 	
+	int n=st.executeUpdate(query); 
+	if(n>0)
+	System.out.println(n+" RECORDs DELETED SUCCESSFULLY");
+	else
+	System.out.println("RECORD NOT DELETED");
+	st.close();		
+	con.close();
+	
+	}
+}
+
+Q1 B)
+/ index.html
+<html>
+<head>
+<title>Slip 4</title>
+</head>
+<body>
+<form name="f1" action="sofiya" method="get" >
+  <p>  <input type="Submit" value="Submit" name="B1"></p>
+</form>
+</body>
+</html>
+
+//web.xml
+<web-app>
+	<servlet>
+      <servlet-name>girl</servlet-name>
+      <servlet-class>Slip4</servlet-class>
+    </servlet>
+	<servlet-mapping>
+        <servlet-name>girl</servlet-name>
+        <url-pattern>/sofiya</url-pattern>
+    </servlet-mapping>
+</web-app>
+
+Slip4.java
+import java.util.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+
+public class Slip4 extends HttpServlet
+{
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	throws IOException, ServletException
+	{
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+        out.println("<html>");
+        out.println("<body>");
+        out.println("<head>");
+        out.println("<title>Request Information</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h3>Request Information</h3><br>");
+        out.println("Method: " + request.getMethod()+"<br>");
+        out.println("Request URI: " + request.getRequestURI()+"<br>");
+        out.println("Protocol: " + request.getProtocol()+"<br>");
+        out.println("PathInfo: " + request.getPathInfo()+"<br>");
+        out.println("Remote Address: " + request.getRemoteAddr()+"<br>");
+        out.println("Remote Host: " + request.getRemoteHost()+"<br>");
+        out.println("Remote User: " + request.getRemoteUser()+"<br>");
+        Enumeration e = request.getHeaderNames();
+        while (e.hasMoreElements())
+        {
+            String name = (String)e.nextElement();
+            String value = request.getHeader(name);
+            out.println(name + " : " + value+"<br>");
+        }
+        out.println("<h3>Server Information</h3><br>");
+	out.println("getServerName(): " + request.getServerName()+"<br>");
+	out.println("getServerPort(): " + request.getServerPort()+"<br>");
+	out.println("getServletContext().getServerInfo(): " + getServletContext().getServerInfo()+"<br>");
+	out.println("getServerInfo() name: " + getServerInfoName(getServletContext().getServerInfo())+"<br>");
+	out.println("getServerInfo() version: " + getServerInfoVersion(getServletContext().getServerInfo())+"<br>");
+	out.println("getServletContext().getAttribute(\"attribute\"): " + getServletContext().getAttribute("attribute")+"<br>");
+	ServletContext context = getServletContext();
+	Enumeration names = context.getServletNames();
+	while (names.hasMoreElements())
+	{
+		String name = (String)names.nextElement();
+		Servlet servlet = context.getServlet(name);
+		out.println("Servlet name: " + name+"<br>");
+		out.println("Servlet class: " + servlet.getClass().getName()+"<br>");
+		out.println("Servlet info: " + servlet.getServletInfo()+"<br>");
+	}
+        out.println("</body>");
+        out.println("</html>");
+    }
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws IOException, ServletException
+    {
+        doGet(request, response);
+    }
+	private String getServerInfoName(String serverInfo)
+	{
+	int slash = serverInfo.indexOf('/');
+	if (slash == -1)
+		return serverInfo;
+	else 
+		return serverInfo.substring(0, slash);
+	}
+	private String getServerInfoVersion(String serverInfo)
+	{
+	int slash = serverInfo.indexOf('/');
+	if (slash == -1) 
+		return null;
+	else 
+		return serverInfo.substring(slash + 1);
+	}
+}
+
+OR Q1 B)
+serverInfo.java
+        import java.io.*;
+        import javax.servlet.*;
+        import javax.servlet.http.*;
+public class serverInfo extends HttpServlet implements Servlet
+{
+    protected void doGet(HttpServletRequest req,HttpServletResponse res)throws IOException,ServletException
+    {
+        res.setContentType("text/html");
+        PrintWriter pw=res.getWriter();
+        pw.println("<html><body><h2>Information about Http Request</h2>");
+        pw.println("<br>Server Name: "+req.getServerName());
+        pw.println("<br>Server Port: "+req.getServerPort());
+        pw.println("<br>Ip Address: "+req.getRemoteAddr());
+//pw.println("<br>Server Path: "+req.getServerPath());        pw.println("<br>Client Browser: "+req.getHeader("User-Agent"));
+        pw.println("</body></html>");
+        pw.close();
+    }
+}
+Web.xml
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app>
+<servlet>
+<servlet-name>serverInfo</servlet-name>
+<servlet-class>ServerInfo</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>serverInfo</servlet-name>
+<url-pattern>/server</url-pattern>
+</servlet-mapping>
+</web-app>
+
+Q2 A)
+Public Class Form1
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Label1.Text = "Year : " & DateTimePicker1.Value.Year
+        Label2.Text = "Month : " & DateTimePicker1.Value.Month
+        Label3.Text = "Day : " & DateTimePicker1.Value.Day
+    End Sub
+End Class
+
+Q2 B) 
+<asp:Button ID="btnInsert" runat="server" Text="Insert Records" OnClick="btnInsert_Click" />
+<asp:Button ID="btnUpdate" runat="server" Text="Update Salary by 15%" OnClick="btnUpdate_Click" />
+<asp:Button ID="btnDelete" runat="server" Text="Delete One Record" OnClick="btnDelete_Click" />
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="true" />
+Imports System.Data.SqlClient
+Public Class _Default
+    Inherits System.Web.UI.Page
+    Dim con As New SqlConnection("Data Source=YOUR_SERVER_NAME;Initial Catalog=YourDatabase;Integrated Security=True")
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+            LoadGrid()
+        End If
+    End Sub
+    Protected Sub btnInsert_Click(sender As Object, e As EventArgs)
+        Dim cmd As New SqlCommand("INSERT INTO DepartmentEmployees (DeptId, DeptName, EmpName, Salary) VALUES
+                                    (1, 'HR', 'Seeta', 40000),
+                                    (2, 'Sales', 'Ravi', 30000),
+                                    (3, 'IT', 'Amit', 50000)", con)
+        con.Open()
+        cmd.ExecuteNonQuery()
+        con.Close()
+        LoadGrid()
+    End Sub
+    Protected Sub btnUpdate_Click(sender As Object, e As EventArgs)
+        ' Increment salary by 15% for one employee (e.g., Seeta)
+        Dim cmd As New SqlCommand("UPDATE DepartmentEmployees SET Salary = Salary * 1.15 WHERE EmpName = 'Seeta'", con)
+        con.Open()
+        cmd.ExecuteNonQuery()
+        con.Close()
+        LoadGrid()
+    End Sub
+    Protected Sub btnDelete_Click(sender As Object, e As EventArgs)
+        ' Delete record of employee named "Ravi"
+        Dim cmd As New SqlCommand("DELETE FROM DepartmentEmployees WHERE EmpName = 'Ravi'", con)
+        con.Open()
+        cmd.ExecuteNonQuery()
+        con.Close()
+        LoadGrid()
+    End Sub
+    Private Sub LoadGrid()
+        Dim da As New SqlDataAdapter("SELECT * FROM DepartmentEmployees", con)
+        Dim dt As New DataTable
+        da.Fill(dt)
+        GridView1.DataSource = dt
+        GridView1.DataBind()
+    End Sub
+End Class

@@ -1,0 +1,178 @@
+S-19
+Q1 A)
+indecx.html
+<html>
+<body>
+<center><br>
+<br>
+		<form action="slip19.jsp" method='GET'>
+		<b>Enter Name :</b>
+		<input type=text name="name">
+		<input type=submit  value="submit">
+		<br><br></form>
+		</center>
+	</body>
+</html>	
+Jsp file
+<%@page import="java.util.*"%>
+<html>
+	<body>
+		<%
+			Date time=new Date();
+			String n=request.getParameter("name");
+			if(time.getHours()>0&&time.getHours()<12)
+			{
+				out.println("Good Morning!!!"+n);
+			}
+			else if(time.getHours()>=12&&time.getHours()<=16)
+			{
+				out.println("Good Afternoon!!!"+n);
+			}
+			else if(time.getHours()>=16&&time.getHours()<20)
+			{
+				out.println("Good Evening!!!"+n);
+			}
+			else 
+				out.println("Good Night!!!"+n);
+		%>
+	</body>
+</html>
+
+
+Q1 B)
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+class StudendAwtJdbc extends Frame implements ActionListener
+{
+Label l1,l2;
+TextField t1,t2;
+Button b1;
+public StudendAwtJdbc()
+{
+setLayout(null);
+setSize(800,600);
+setTitle("Record Display");
+setVisible(true);
+l1=new Label("ENTER ENO");
+l1.setBounds(100,200,150,50);
+add(l1);
+t1=new TextField();
+t1.setBounds(500,200,150,50);
+add(t1);
+t2=new TextField();
+t2.setBounds(300,300,150,50);
+add(t2);
+b1=new Button("DISPLAY");
+b1.setBounds(300,400,150,50);
+add(b1);
+b1.addActionListener(this);
+
+}
+public void actionPerformed(ActionEvent ae)
+{
+	String cap=ae.getActionCommand();
+	if(cap.equals("DISPLAY"))
+	{
+		try
+		{
+	Connection con;
+	PreparedStatement ps;
+	String query;
+	ResultSet rs;
+	int a;
+	String d;
+	/*Scanner sc=new Scanner(System.in);
+							  	
+	System.out.println("Pls Enter ENAME");
+	b=sc.next();
+	*/
+	a=Integer.parseInt(t1.getText());
+	Class.forName("com.mysql.jdbc.Driver");  
+	con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root",""); 
+	query="select * from student where rno like ?"; 	
+	ps=con.prepareStatement(query);  	
+        ps.setInt(1,a);
+	rs=ps.executeQuery(); 	if(rs.next())
+	{
+	t2.setText(rs.getInt("rno") + " " + rs.getString("sname") + " " + rs.getFloat("percentage"));
+	}
+	ps.close();		
+	con.close();
+	}catch(Exception e){}
+		}}}
+public class Slip19_q2
+{
+	public static void main(String args[])
+	{
+	new StudendAwtJdbc();
+	}
+}
+
+Q2 A)
+Public Class Form1
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim str, rev As String
+        str = TextBox1.Text
+        rev = StrReverse(str)
+        If (str = rev) Then
+            MessageBox.Show("String is Palindrome : " & str)
+        Else
+            MessageBox.Show("String is Not Palindrome : " & str)
+        End If
+    End Sub
+End Class
+
+Q2 B)
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StoreVoteCombined.aspx.cs" Inherits="StoreVoteCombined" %>
+<!DOCTYPE html>
+<html>
+<head><title>Store + Book Voting</title></head>
+<body>
+<form runat="server">
+<h3>Store Items</h3>
+<asp:ListBox ID="lstItems" runat="server" AutoPostBack="true" OnSelectedIndexChanged="lstItems_SelectedIndexChanged">
+    <asp:ListItem>Pen</asp:ListItem>
+    <asp:ListItem>Book</asp:ListItem>
+</asp:ListBox><br />
+<asp:Image ID="imgItem" runat="server" Width="100" /><br />
+<asp:Button ID="btnCost" runat="server" Text="Show Cost" OnClick="btnCost_Click" />
+<asp:Label ID="lblCost" runat="server" Font-Bold="true" /><br /><br />
+<h3>Vote for the Book</h3>
+<asp:RadioButtonList ID="rblVote" runat="server">
+    <asp:ListItem>Good</asp:ListItem>
+    <asp:ListItem>Satisfactory</asp:ListItem>
+    <asp:ListItem>Bad</asp:ListItem>
+</asp:RadioButtonList>
+<asp:Button ID="btnVote" runat="server" Text="Vote" OnClick="btnVote_Click" /><br />
+Good: <asp:Label ID="lblGood" runat="server" /><br />
+Satisfactory: <asp:Label ID="lblSat" runat="server" /><br />
+Bad: <asp:Label ID="lblBad" runat="server" />
+</form>
+</body>
+</html>
+public partial class StoreVoteCombined : System.Web.UI.Page
+{
+    static int good = 0, sat = 0, bad = 0;
+    protected void lstItems_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        imgItem.ImageUrl = lstItems.SelectedItem.Text == "Pen" ? "pen.jpg" : "book.jpg";
+    }
+    protected void btnCost_Click(object sender, EventArgs e)
+    {
+        lblCost.Text = lstItems.SelectedItem.Text == "Pen" ? "Cost: ₹10" : "Cost: ₹50";
+    }
+    protected void btnVote_Click(object sender, EventArgs e)
+    {
+        string vote = rblVote.SelectedItem.Text;
+        if (vote == "Good") good++;
+        else if (vote == "Satisfactory") sat++;
+        else bad++;
+        int total = good + sat + bad;
+        lblGood.Text = (good * 100 / total) + "%";
+        lblSat.Text = (sat * 100 / total) + "%";
+        lblBad.Text = (bad * 100 / total) + "%";
+    }
+}
+
+ 

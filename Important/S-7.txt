@@ -1,0 +1,151 @@
+S-7
+Q1 A)
+<html>
+	<body>
+		<center><br><br>
+		<form action="slip7.jsp" method="GET"><b>
+		Enter The email-ID :</b>
+		<input type=text name=email><br><br>
+		<input type=submit value="SUBMIT">
+		</form>
+		</center>
+	</body>
+</html>
+
+Slip7.jsp
+<html>
+	<body>
+		<font color=red>
+<%@page language="java"%>
+
+<%! int cnt=0; 
+ 	char ch;
+%>
+<%
+String email=request.getParameter("email");
+						out.print(email+"");
+			for(int i=0;i <email.length();i++)
+			{
+				ch=email.charAt(i);
+				if(ch=='@')
+				{
+				     cnt++;
+				}
+				if(ch=='.')
+				{
+				     cnt++;		
+				}
+			}
+			if(cnt==2)
+				 out.println("Valid Email Id ");	
+			else
+				out.println("InValid Email Id");	
+			%>
+		</font>
+	</body>
+</html>
+
+
+Q1 B)
+import java.awt.*;
+import java.awt.event.*;
+public class Slip12 extends Frame implements ActionListener,Runnable
+{
+	Thread y;
+	TextField t;
+	Button b;
+	Slip12()
+	{
+		t=new TextField(20);
+		b=new Button("start");
+		setLayout(new FlowLayout());
+		add(b);
+		add(t);
+		b.addActionListener(this);
+		setSize(300,300);
+		setVisible(true);	
+		y=new Thread(this);
+	}	
+	public void actionPerformed(ActionEvent e)
+	{
+		String msg=e.getActionCommand();
+		if(msg.equals("start"))
+		{
+			y.start();
+		}
+	}
+	public void run()
+	{
+			for(int i=1;i<=100;i++)
+			{
+			t.setText(i+"");
+				try
+				{
+				Thread.sleep(100);
+				}
+				catch(Exception e){}
+		}
+	}	
+	public static void main(String[] d)
+	{
+		new Slip12();
+	}
+}
+
+
+Q2 A)
+Public Class Slip7A
+Inherits System.Web.UI.Page
+Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+End Sub
+Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+Dim n As Integer = CInt(TextBox1.Text)
+Dim i, sum As Integer
+sum = 0
+Try
+For i = 1 To n - 1
+If n Mod i = 0 Then
+sum = sum + i
+End If
+Next
+If n = sum Then
+MsgBox(n & " is perfect Number")
+Else
+Throw New Exception()
+End If
+Catch ex As Exception
+MsgBox(n & " is not perfect Number")
+End Try
+End Sub
+End Class
+
+Q2 B)
+Imports System.Data.SqlClient
+Public Class Slip7B
+Dim con As SqlConnection
+Dim cmd As SqlCommand
+Dim adpt As SqlDataAdapter
+Dim ds As New DataSet
+Dim cnt As Integer
+Private Sub Slip7B_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+con = New SqlConnection("Data Source=LAPTOP-FRVE0I9E\SQLEXPRESS;Initial Catalog=SlipDB;Integrated Security=True")
+con.Open()
+End Sub
+Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+cmd = New SqlCommand("update student set city='Pune' where city='Mumbai'", con)
+cnt = cmd.ExecuteNonQuery()
+MsgBox(cnt & " Row Updated")
+cmd = New SqlCommand("select * from student ", con)
+adpt = New SqlDataAdapter(cmd)
+adpt.Fill(ds, "stud")
+DataGridView2.DataSource = ds
+DataGridView2.DataMember = "stud"
+End Sub
+Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+cmd = New SqlCommand("select * from student ", con)
+adpt = New SqlDataAdapter(cmd)
+adpt.Fill(ds, "stud")
+DataGridView1.DataSource = ds
+DataGridView1.DataMember = "stud"
+End Sub
+End Class

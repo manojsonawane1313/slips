@@ -1,0 +1,93 @@
+S-20
+Q1 A)
+import java.sql.*;
+import java.util.Scanner;
+public class DeleteEmployee {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Employee No to Delete: ");
+        int eno = sc.nextInt();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // For newer MySQL versions
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/testdb", "root", "");
+            String query = "DELETE FROM emp WHERE eno=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, eno);
+            int rows = ps.executeUpdate();
+            if (rows > 0)
+                System.out.println("Record deleted successfully.");
+            else
+                System.out.println("No record found with ENO: " + eno);
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+
+Q1 B)
+import java.applet.Applet;
+import java.awt.Graphics;
+/* <applet code="TempleApplet.class" width="600" height="500"></applet> */
+public class TempleApplet extends Applet implements Runnable {
+    Thread t;
+
+    public void init() {
+        t = new Thread(this);
+        t.start();
+    }
+    public void run() {
+        repaint();
+    }
+    public void paint(Graphics g) {
+               g.drawLine(300, 100, 200, 200);
+        g.drawLine(300, 100, 400, 200);
+        g.drawRect(200, 200, 200, 200); // Middle structure
+        g.drawRect(250, 400, 100, 100); // Door
+    }
+}
+
+Q2 A)
+Public Class Form1
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim root1 As TreeNode = TreeView1.Nodes.Add("Fruits")
+        Dim root2 As TreeNode = TreeView1.Nodes.Add("Vegetables")
+        root1.Nodes.Add("Apple")
+        root1.Nodes.Add("Mango")
+        root2.Nodes.Add("Potato")
+        root2.Nodes.Add("Tomato")
+               TreeView1.ExpandAll()
+    End Sub
+End Class
+
+Q2 B)
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace Slip20B
+{
+public partial class WebForm1 : System.Web.UI.Page
+{
+protected void Page_Load(object sender, EventArgs e)
+{
+}
+protected void Button1_Click(object sender, EventArgs e)
+{
+try
+{
+int[] arr = { 10, 20, 30, 40, 50 };
+arr[6] = 60;
+Response.Write(arr[6].ToString());
+}
+catch(IndexOutOfRangeException ex)
+{
+Response.Redirect("WebForm2.aspx");
+}
+}
+}
+}

@@ -1,0 +1,187 @@
+S-15
+Q1 A)
+class Slip26 implements Runnable
+{
+	public void run()
+	{	
+	try
+		{
+			for(char c='A';c<='Z';c++)
+			{
+				System.out.println(c);
+				Thread.sleep(3000);	
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("error");
+		}	
+	}
+	public static void main(String[] d)
+	{
+		Slip26 x=new Slip26();
+		Thread y=new Thread(x);
+		y.start();
+		
+	}
+}
+
+Q1 B)
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+class StudendAwtJdbc extends Frame implements ActionListener
+{
+Label l1,l2,l3,l4;
+TextField t1,t2,t3;
+Button b1;
+public StudendAwtJdbc()
+{
+setLayout(null);
+setSize(800,600);
+setTitle("Insert Record");
+setVisible(true);
+l1=new Label("ENTER ENO");
+l1.setBounds(100,100,300,50);
+add(l1);
+l2=new Label("ENTER ENAME");
+l2.setBounds(100,200,300,50);
+add(l2);
+l3=new Label("ENTER SAL");
+l3.setBounds(100,300,300,50);
+add(l3);
+l4=new Label("ANSWERS");
+l4.setBounds(50,50,300,50);
+add(l4);
+t1=new TextField();
+t1.setBounds(500,100,200,50);
+add(t1);
+t2=new TextField();
+t2.setBounds(500,200,200,50);
+add(t2);
+t3=new TextField();
+t3.setBounds(500,300,200,50);
+add(t3);
+b1=new Button("SEARCH");
+b1.setBounds(300,400,200,50);
+add(b1);
+b1.addActionListener(this);
+
+}
+public void actionPerformed(ActionEvent ae)
+{
+	String cap=ae.getActionCommand();
+	if(cap.equals("SEARCH"))
+	{
+		try
+		{
+	Connection con;
+	PreparedStatement ps;
+	String query;
+	ResultSet rs;
+	int a;
+	a=Integer.parseInt(t1.getText());
+	Class.forName("com.mysql.jdbc.Driver"); 
+	con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");	
+query="select * from emp where eno like ?"; 
+	ps=con.prepareStatement(query);  
+	ps.setInt(1,a);
+	rs=ps.executeQuery(); 
+	if(rs.next())
+	{
+	t2.setText(rs.getString("ename"));
+	t3.setText(rs.getFloat("sal")+"");
+	}
+	ps.close();		
+	con.close();
+ 		}catch(Exception e){}
+	}
+	}
+}
+public class SelectStudentMain
+{
+	public static void main(String args[])
+	{
+	new StudendAwtJdbc();
+	}
+}
+
+
+Q2 A)
+Public Class Form1
+    Private Sub RedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RedToolStripMenuItem.Click
+        Me.BackColor = Color.Red
+    End Sub
+    Private Sub GreenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GreenToolStripMenuItem.Click
+        Me.BackColor = Color.Green
+    End Sub
+    Private Sub BlueToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BlueToolStripMenuItem.Click
+        Me.BackColor = Color.Blue
+    End Sub
+End Class
+
+
+Q2 B)
+using System;
+class Customer
+{
+    public int CustomerNo;
+    public string Name;
+    public string Address;
+    public int ItemNo;
+    public int Quantity;
+    public double Price;
+    public double TotalPrice;
+    public void GetDetails()
+    {
+        Console.Write("Enter Customer No: ");
+        CustomerNo = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter Name: ");
+        Name = Console.ReadLine();
+        Console.Write("Enter Address: ");
+        Address = Console.ReadLine();
+        Console.Write("Enter Item No: ");
+        ItemNo = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter Quantity: ");
+        Quantity = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter Price per item: ");
+        Price = Convert.ToDouble(Console.ReadLine());
+
+        TotalPrice = Quantity * Price;
+    }
+    public void ShowDetails()
+    {
+        Console.WriteLine($"Customer No: {CustomerNo}");
+        Console.WriteLine($"Name: {Name}");
+        Console.WriteLine($"Address: {Address}");
+        Console.WriteLine($"Item No: {ItemNo}");
+        Console.WriteLine($"Quantity: {Quantity}");
+        Console.WriteLine($"Price per Item: {Price}");
+        Console.WriteLine($"Total Price: {TotalPrice}");
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter number of customers: ");
+        int n = Convert.ToInt32(Console.ReadLine());
+        Customer[] customers = new Customer[n];
+        double grandTotal = 0;
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine($"\nEnter details for Customer {i + 1}:");
+            customers[i] = new Customer();
+            customers[i].GetDetails();
+            grandTotal += customers[i].TotalPrice;
+        }
+        Console.WriteLine("\n--- Customer Details ---");
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine($"\nCustomer {i + 1}:");
+            customers[i].ShowDetails();
+        }
+        Console.WriteLine($"\nTotal price of all items: {grandTotal}");
+    }
+}
+
